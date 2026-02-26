@@ -8,10 +8,11 @@ public class Arma {
     private int cantidad_objetivos;
     private String efecto;
     private int num_ataques;
+    private boolean distancia;
     
 
 
-    Arma( String nombre,int daño, int precision, int cantidad_objetivos, String efecto, int num_ataques)
+    Arma( String nombre,int daño, int precision, int cantidad_objetivos, String efecto, int num_ataques, boolean distancia)
     {
         this.nombre = nombre;
         this.daño = daño;
@@ -19,6 +20,7 @@ public class Arma {
         this.cantidad_objetivos = cantidad_objetivos;
         this.efecto = efecto;
         this.num_ataques = num_ataques;
+        this.distancia = distancia;
     }
 
     //SETTERS Y GETTERS
@@ -28,6 +30,7 @@ public class Arma {
     public void setCantidadObj(int cantidad_objetivos){this.cantidad_objetivos = cantidad_objetivos;}
     public void setEfecto(String efecto){this.efecto = efecto;}
     public void setNumAtaques(int num_ataques){this.num_ataques = num_ataques;}
+    public void setDistancia(boolean distancia){this.distancia = distancia;}
 
     public String getnombre(){ return this.nombre;}
     public int getDaño(){ return this.daño;}
@@ -35,5 +38,6 @@ public class Arma {
     public int getCantidadObj(){ return this.cantidad_objetivos;}
     public String getEfecto(){ return this.efecto;}
     public int getNumAtaques(){ return this.num_ataques;}
+    public boolean getDistancia(){ return this.distancia;}
 
 }
