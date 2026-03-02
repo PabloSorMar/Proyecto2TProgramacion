@@ -7,9 +7,11 @@ public abstract class Entidad{
     private int turnoStun;
     private int turnoHemorragia;
     private int turnoVeneno;
-    public boolean defendido;
+    private boolean defendido;
+    private Arma arma;
+    private Armaduras armadura;
 
-    Entidad(String nombre, int vida, boolean distancia, int turnoStun, int turnoHemorragia, int turnoVeneno, boolean defendido){
+    Entidad(String nombre, int vida, boolean distancia, int turnoStun, int turnoHemorragia, int turnoVeneno, boolean defendido, Arma arma, Armaduras armadura){
         this.nombre = nombre;
         this.vida = vida;
         this.distancia = distancia;
@@ -17,6 +19,8 @@ public abstract class Entidad{
         this.turnoHemorragia = turnoHemorragia;
         this.turnoVeneno = turnoVeneno;
         this.defendido = defendido;
+        this.arma = arma;
+        this.armadura = armadura;
     }
     
     public String getNombre(){return this.nombre;}
@@ -26,6 +30,8 @@ public abstract class Entidad{
     public int getTurnoHemorragia(){return this.turnoHemorragia;}
     public int getTurnoVeneno(){return this.turnoVeneno;}
     public boolean getDefendido(){return this.defendido;}
+    public Arma getArma(){return this.arma;}
+    public Armaduras getArmadura(){return this.armadura;}
 
     public void setNombre(String nombre){this.nombre = nombre;}
     public void setVida(int vida){this.vida = vida;}
@@ -34,4 +40,6 @@ public abstract class Entidad{
     public void setTurnoHemorragia(int turnoHemorragia){this.turnoHemorragia = turnoHemorragia;}
     public void setTurnoVeneno(int turnoVeneno){this.turnoVeneno = turnoVeneno;}
     public void setDefendido(boolean defendido){this.defendido = defendido;}
+    public void setArma(Arma arma){this.arma = arma;}
+    public void setArmadura(Armaduras armadura){this.armadura = armadura;}
 }
