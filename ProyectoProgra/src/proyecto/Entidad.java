@@ -1,6 +1,6 @@
 package proyecto;
 
-public abstract class Entidad{
+public class Entidad{
     private String nombre;
     private int vida;
     private boolean distancia;
@@ -45,6 +45,6 @@ public abstract class Entidad{
     public void setDefendido(boolean defendido){this.defendido = defendido;}
     public void setArma(Arma arma){this.arma = arma;}
     public void setArmadura(Armaduras armadura){this.armadura = armadura;}
-    public void setHabilidades(List<Habilidades> habilidades){this.habilidades = armadura;}
+    public void setHabilidades(List<Habilidades> habilidades){this.habilidades = habilidades;}
 
 }

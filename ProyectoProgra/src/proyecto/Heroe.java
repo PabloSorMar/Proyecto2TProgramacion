@@ -12,5 +12,4 @@ this.arma2 = arma2;
 
 public Arma getArma(){return this.arma2;}
 public void setArma(Arma arma2){this.arma2 = arma2;}
-
 }
