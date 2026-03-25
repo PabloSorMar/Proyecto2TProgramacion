@@ -1,43 +1,62 @@
 package proyecto;
 
-
 public class Arma {
     private String nombre;
-    private int daño;
+    private int dañoBase;
     private int precision;
-    private int cantidad_objetivos;
+    private boolean esMelee;
+    private int municionAct;
+    private int municionMax;
+    // Opcionales para mantener algunas mecánicas antiguas si se desea
+    private int cantidadObjetivos;
     private String efecto;
-    private int num_ataques;
-    private boolean distancia;
-    
+    private int numAtaques;
 
-
-    Arma( String nombre,int daño, int precision, int cantidad_objetivos, String efecto, int num_ataques, boolean distancia)
-    {
+    Arma(String nombre, int dañoBase, int precision, boolean esMelee, int municionMax, int cantidadObjetivos, String efecto, int numAtaques) {
         this.nombre = nombre;
-        this.daño = daño;
+        this.dañoBase = dañoBase;
         this.precision = precision;
-        this.cantidad_objetivos = cantidad_objetivos;
+        this.esMelee = esMelee;
+        this.municionMax = municionMax;
+        this.municionAct = municionMax;
+        this.cantidadObjetivos = cantidadObjetivos;
         this.efecto = efecto;
-        this.num_ataques = num_ataques;
-        this.distancia = distancia;
+        this.numAtaques = numAtaques;
     }
 
-    //SETTERS Y GETTERS
-    public void setNombre(String nombre){this.nombre = nombre;}
-    public void setDaño(int daño){this.daño = daño;}
-    public void setPrecision(int precision){this.precision = precision;}
-    public void setCantidadObj(int cantidad_objetivos){this.cantidad_objetivos = cantidad_objetivos;}
-    public void setEfecto(String efecto){this.efecto = efecto;}
-    public void setNumAtaques(int num_ataques){this.num_ataques = num_ataques;}
-    public void setDistancia(boolean distancia){this.distancia = distancia;}
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setDañoBase(int dañoBase) { this.dañoBase = dañoBase; }
+    public void setPrecision(int precision) { this.precision = precision; }
+    public void setEsMelee(boolean esMelee) { this.esMelee = esMelee; }
+    public void setMunicionAct(int municionAct) { this.municionAct = municionAct; }
+    public void setMunicionMax(int municionMax) { this.municionMax = municionMax; }
+    public void setCantidadObjetivos(int cantidadObjetivos) { this.cantidadObjetivos = cantidadObjetivos; }
+    public void setEfecto(String efecto) { this.efecto = efecto; }
+    public void setNumAtaques(int numAtaques) { this.numAtaques = numAtaques; }
 
-    public String getnombre(){ return this.nombre;}
-    public int getDaño(){ return this.daño;}
-    public int getPrecision(){ return this.precision;}
-    public int getCantidadObj(){ return this.cantidad_objetivos;}
-    public String getEfecto(){ return this.efecto;}
-    public int getNumAtaques(){ return this.num_ataques;}
-    public boolean getDistancia(){ return this.distancia;}
+    public String getNombre() { return this.nombre; }
+    public int getDañoBase() { return this.dañoBase; }
+    public int getPrecision() { return this.precision; }
+    public boolean getEsMelee() { return this.esMelee; }
+    public int getMunicionAct() { return this.municionAct; }
+    public int getMunicionMax() { return this.municionMax; }
+    public int getCantidadObjetivos() { return this.cantidadObjetivos; }
+    public String getEfecto() { return this.efecto; }
+    public int getNumAtaques() { return this.numAtaques; }
 
+    public int disparar() {
+        if (this.esMelee) {
+            return this.dañoBase;
+        } else if (this.municionAct > 0) {
+            gastarMunicion();
+            return this.dañoBase;
+        }
+        return 0; // Sin munición
+    }
+
+    public void gastarMunicion() {
+        if (this.municionAct > 0) {
+            this.municionAct--;
+        }
+    }
 }

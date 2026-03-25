@@ -1,15 +1,23 @@
 package proyecto;
 
-public class Heroe extends Entidad{
-private Arma arma2;
+import java.util.List;
 
+public class Heroe extends Entidad {
+    private String faccion;
 
-Heroe(String nombre, int vida, boolean distancia, int turnoStun, int turnoHemorragia, int turnoVeneno, boolean defendido, Arma arma, Armaduras armadura, List<Habilidades> habilidades, Arma arma2 )
-{
-super(String nombre, int vida, boolean distancia, int turnoStun, int turnoHemorragia, int turnoVeneno, boolean defendido, Arma arma, Armaduras armadura, List<Habilidades> habilidades)
-this.arma2 = arma2;  
-}
+    public Heroe(String nombre, int vidaMax, boolean esDistancia, String faccion) {
+        super(nombre, vidaMax, esDistancia);
+        this.faccion = faccion;
+    }
 
-public Arma getArma(){return this.arma2;}
-public void setArma(Arma arma2){this.arma2 = arma2;}
+    public String getFaccion() { return this.faccion; }
+    public void setFaccion(String faccion) { this.faccion = faccion; }
+
+    public int elegirAccion() {
+        return 0; 
+    }
+
+    public void restaurarPostCombate() {
+        
+    }
 }
