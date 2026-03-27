@@ -1,9 +1,10 @@
 package proyecto;
+import java.util.List; 
+import java.util.Random; 
 
 public  class Entidad{
     private String nombre;
     private int vida;
-    private boolean distancia;
     private int turnoStun;
     private int turnoHemorragia;
     private int turnoVeneno;
@@ -12,14 +13,13 @@ public  class Entidad{
     private Armaduras armadura;
     private List<Habilidades> habilidades;
 
-    Entidad(String nombre, int vida, boolean distancia, int turnoStun, int turnoHemorragia, int turnoVeneno, boolean defendido, Arma arma, Armaduras armadura, List<Habilidades> habilidades){
+    Entidad(String nombre, int vida,  Arma arma, Armaduras armadura, List<Habilidades> habilidades){
         this.nombre = nombre;
         this.vida = vida;
-        this.distancia = distancia;
-        this.turnoStun = turnoStun;
-        this.turnoHemorragia = turnoHemorragia;
-        this.turnoVeneno = turnoVeneno;
-        this.defendido = defendido;
+        this.turnoStun = 0;
+        this.turnoHemorragia = 0;
+        this.turnoVeneno = 0;
+        this.defendido = false;
         this.arma = arma;
         this.armadura = armadura;
         this.habilidades = habilidades;
@@ -28,8 +28,8 @@ public  class Entidad{
     //SETTERS Y GETTERS
     public String getNombre(){return this.nombre;}
     public int getVida(){return this.vida;}
-    public boolean getDistancia(){return this.distancia;}
-    public int getTurnoStun(){return his.turnoStun;}
+
+    public int getTurnoStun(){return this.turnoStun;}
     public int getTurnoHemorragia(){return this.turnoHemorragia;}
     public int getTurnoVeneno(){return this.turnoVeneno;}
     public boolean getDefendido(){return this.defendido;}
@@ -39,7 +39,6 @@ public  class Entidad{
 
     public void setNombre(String nombre){this.nombre = nombre;}
     public void setVida(int vida){this.vida = vida;}
-    public void setDistancia(boolean distancia){this.distancia = distancia;}
     public void setTurnoStun(int turnoStun){this.turnoStun = turnoStun;}
     public void setTurnoHemorragia(int turnoHemorragia){this.turnoHemorragia = turnoHemorragia;}
     public void setTurnoVeneno(int turnoVeneno){this.turnoVeneno = turnoVeneno;}
@@ -48,14 +47,14 @@ public  class Entidad{
     public void setArmadura(Armaduras armadura){this.armadura = armadura;}
     public void setHabilidades(List<Habilidades> habilidades){this.habilidades = habilidades;}
 
-    public void RealizarTurno(List<Habilidades> aliados, List<Habilidades> enemigos, Entidad personaje)
+    public void RealizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje)
     {
-        system.out.prinln("Turno de " + this.getNombre());
+        System.out.println("Turno de " + this.getNombre());
         
         //Primero efectos acvito de daño en si mismo
         if(this.getTurnoStun() > 0)
         {
-            system.out.prinln(this.getNombre() +" esta arturdido")
+            System.out.println(this.getNombre() +" esta arturdido");
             setTurnoStun(getTurnoStun()-1);
         }
         else
@@ -75,66 +74,66 @@ public  class Entidad{
              int accion =  ran.nextInt(0,4);
             if(accion == 0)
             {
-                system.out.prinln(this.getNombre() + " decide atacar con su arma")
+                System.out.println(this.getNombre() + " decide atacar con su arma");
                 if(aliados.contains(personaje))
                 {
-                    for(int i = 0; i < this.getArma().getCantidadObj())
+                    for(int i = 0; i < this.getArma().getCantidadObjetivos();i++)
                     {
-                        Random ran = new Random;
-                        int objetivo_aleatorio = ran.nextInt(0,enemigos.size())
-                        for(int i = 0; i < this.getArma().getNumAtaques())
+                        int objetivo_aleatorio = ran.nextInt(0,enemigos.size());
+                        for(int j = 0; j < this.getArma().getNumAtaques();j++)
                         {
-                            enemigos.at(objetivo_aleatorio).setVida(enemigos.at(objetivo_aleatorio).getVida() - this.getArma().getDaño())
+                            enemigos.get(objetivo_aleatorio).setVida(enemigos.get(objetivo_aleatorio).getVida() - this.getArma().getDaño());
                         }
                     }
                 }
                 else
                 {
-                 for(int i = 0; i < this.getArma().getCantidadObj())
+                 for(int i = 0; i < this.getArma().getCantidadObjetivos();i++)
                     {
-                        Random ran = new Random;
-                        int objetivo_aleatorio = ran.nextInt(0,aliados.size())
-                        for(int i = 0; i < this.getArma().getNumAtaques())
+                      
+                        int objetivo_aleatorio = ran.nextInt(0,aliados.size());
+                        for(int j = 0; j < this.getArma().getNumAtaques();j++)
                         {
-                            aliados.at(objetivo_aleatorio).setVida(aliados.at(objetivo_aleatorio).getVida() - this.getArma().getDaño())
+                            aliados.get(objetivo_aleatorio).setVida(aliados.get(objetivo_aleatorio).getVida() - this.getArma().getDaño());
                         }
                     }   
                 }
             }
             else if(accion == 1)
             {
+                System.out.println(this.getNombre() + " decide  colocarse en posicion defensiva");      
                 this.setDefendido(true);
             }
             else if (accion == 2)
             {
-                Random ran = new Random;
-                int habilidad_aleatoria = ran.nextInt(0,this.getHabilidades().size())
+                int habilidad_aleatoria = ran.nextInt(0,this.getHabilidades().size());
+                System.out.println(this.getNombre() + " decide usar una habilidad " + this.getHabilidades().get(habilidad_aleatoria).getNombre());
                 if(aliados.contains(personaje))
                 {
-                    if(this.getHabilidades().at(habilidad_aleatoria).getTipo() == "ofensiva")
+                    if(this.getHabilidades().get(habilidad_aleatoria).getTipo() == "ofensiva")
                     {
-                       this.getHabilidades().at(habilidad_aleatoria).EjecutarHabilidad(enemigos); 
+                       this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(enemigos); 
                     }
                     else
                     {
-                        this.getHabilidades().at(habilidad_aleatoria).EjecutarHabilidad(aliados); 
+                        this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(aliados); 
                     }
                 }
                 else
                 {
-                    if(this.getHabilidades().at(habilidad_aleatoria).getTipo() == "ofensiva")
+                    if(this.getHabilidades().get(habilidad_aleatoria).getTipo() == "ofensiva")
                     {
-                       this.getHabilidades().at(habilidad_aleatoria).EjecutarHabilidad(aliados); 
+                       this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(aliados); 
                     }
                     else
                     {
-                        this.getHabilidades().at(habilidad_aleatoria).EjecutarHabilidad(enemigos); 
+                        this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(enemigos); 
                     }
                 }
             }
             else
             {
-                system.out.prinln(this.getNombre() + " decide pasar turno sin realizar ninguna accion");
+                System.out.println(this.getNombre() + " decide pasar turno sin realizar ninguna accion");
             }
 
         }

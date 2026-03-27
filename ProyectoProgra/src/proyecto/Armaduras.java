@@ -5,10 +5,10 @@ public class Armaduras {
     private int velocidad;
 
 
-    Armaduras( String nombre,int armadura, int velocidad)
+    Armaduras( String nombre,int blindaje, int velocidad)
     {
         this.nombre = nombre;
-        this.armadura = armadura;
+        this.blindaje = blindaje;
         this.velocidad = velocidad;
     }
 

@@ -2,19 +2,18 @@ package proyecto;
 
 public class Arma {
     private String nombre;
-    private int dañoBase;
+    private int daño;
     private int precision;
     private boolean esMelee;
     private int municionAct;
     private int municionMax;
-    // Opcionales para mantener algunas mecánicas antiguas si se desea
     private int cantidadObjetivos;
     private String efecto;
     private int numAtaques;
 
-    Arma(String nombre, int dañoBase, int precision, boolean esMelee, int municionMax, int cantidadObjetivos, String efecto, int numAtaques) {
+    Arma(String nombre, int daño, int precision, boolean esMelee, int municionMax, int cantidadObjetivos, String efecto, int numAtaques) {
         this.nombre = nombre;
-        this.dañoBase = dañoBase;
+        this.daño = daño;
         this.precision = precision;
         this.esMelee = esMelee;
         this.municionMax = municionMax;
@@ -25,7 +24,7 @@ public class Arma {
     }
 
     public void setNombre(String nombre) { this.nombre = nombre; }
-    public void setDañoBase(int dañoBase) { this.dañoBase = dañoBase; }
+    public void setDaño(int daño) { this.daño = daño; }
     public void setPrecision(int precision) { this.precision = precision; }
     public void setEsMelee(boolean esMelee) { this.esMelee = esMelee; }
     public void setMunicionAct(int municionAct) { this.municionAct = municionAct; }
@@ -35,7 +34,7 @@ public class Arma {
     public void setNumAtaques(int numAtaques) { this.numAtaques = numAtaques; }
 
     public String getNombre() { return this.nombre; }
-    public int getDañoBase() { return this.dañoBase; }
+    public int getDaño() { return this.daño; }
     public int getPrecision() { return this.precision; }
     public boolean getEsMelee() { return this.esMelee; }
     public int getMunicionAct() { return this.municionAct; }
@@ -46,10 +45,10 @@ public class Arma {
 
     public int disparar() {
         if (this.esMelee) {
-            return this.dañoBase;
+            return this.daño;
         } else if (this.municionAct > 0) {
             gastarMunicion();
-            return this.dañoBase;
+            return this.daño;
         }
         return 0; // Sin munición
     }
