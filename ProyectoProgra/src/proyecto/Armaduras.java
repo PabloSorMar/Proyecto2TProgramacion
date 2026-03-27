@@ -1,21 +1,23 @@
 package proyecto;
-
 public class Armaduras {
     private String nombre;
-    private int puntosDefensa;
-    private int bonoVelocidad;
+    private int blindaje;
+    private int velocidad;
 
-    public Armaduras(String nombre, int puntosDefensa, int bonoVelocidad) {
+
+    Armaduras( String nombre,int armadura, int velocidad)
+    {
         this.nombre = nombre;
-        this.puntosDefensa = puntosDefensa;
-        this.bonoVelocidad = bonoVelocidad;
+        this.armadura = armadura;
+        this.velocidad = velocidad;
     }
 
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public void setPuntosDefensa(int puntosDefensa) { this.puntosDefensa = puntosDefensa; }
-    public void setBonoVelocidad(int bonoVelocidad) { this.bonoVelocidad = bonoVelocidad; }
+    //SETERS Y GETTERS
+    public void setNombre(String nombre){this.nombre = nombre;}
+    public void setArmadura(int blindaje){this.blindaje = blindaje;}
+    public void setVelocidad(int velocidad){this.velocidad = velocidad;}
    
-    public String getNombre() { return this.nombre; }
-    public int getPuntosDefensa() { return this.puntosDefensa; }
-    public int getBonoVelocidad() { return this.bonoVelocidad; }
+    public String getnombre(){ return this.nombre;}
+    public int getBlindaje(){ return this.blindaje;}
+    public int getVelocidad(){ return this.velocidad;}
 }
