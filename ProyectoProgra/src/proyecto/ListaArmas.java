@@ -12,10 +12,10 @@ public enum ListaArmas {
 
     PISTOLA_BOLTER("Pistola Bolter", 35, 65, false, 3, 1, 1),
     CARABINA_BOLTER("Carabina Bolter", 40, 80, false, 6, 1, 4),
-    GUANTELETE_GRANADERO("Guantelete Granadero", 55, 75, false, 5, 99, 1),
+    GUANTELETE_GRANADERO("Guantelete Granadero", 55, 75, false, 5, 3, 1),
     CANON_DE_PLASMA("Cañón de plasma", 80, 70, false, 4, 1, 1),
-    PISTOLA_DE_FUSION("Pistola de Fusión", 45, 85, false, 2, 99, 1),
-    LANZAMISILES_CICLONICO("Lanzamisiles Ciclónico", 85, 70, false, 1, 99, 2),
+    PISTOLA_DE_FUSION("Pistola de Fusión", 45, 85, false, 2, 2, 1),
+    LANZAMISILES_CICLONICO("Lanzamisiles Ciclónico", 85, 70, false, 1, 5, 2),
 
     CANON_DE_ASALTO("Cañón de Asalto", 30, 75, false, 4, 1, 8),
 
@@ -24,7 +24,7 @@ public enum ListaArmas {
     REBANADORA("Rebanadora", 45, 80, true, 0, 1, 1),
     GARRA_DE_KOMBATE("Garra de Kombate", 75, 75, true, 0, 1, 1),
     MEGA_BLASTA("Mega-Blasta", 65, 60, false, 2, 1, 1),
-    QUEMADOR("Quemador", 40, 95, false, 4, 99, 1),
+    QUEMADOR("Quemador", 40, 95, false, 4, 4, 1),
 
     MANDIBULAS("Mandíbulas", 20, 90, true, 0, 1, 2),
     RIFLE_GAUSS("Rifle Gauss", 45, 85, false, 4, 1, 2),
@@ -38,7 +38,7 @@ public enum ListaArmas {
     GARRAS_LACERANTES("Garras Lacerantes", 55, 90, true, 0, 1, 3),
     ESPADA_OSEA("Espada Ósea", 65, 85, true, 0, 1, 2),
     GARRAS_GARFIO("Garras Garfio", 70, 95, true, 0, 1, 2),
-    EXPLOSION_MENTAL("Explosión Mental", 75, 90, false, 2, 99, 1),
+    EXPLOSION_MENTAL("Explosión Mental", 75, 90, false, 2, 4, 1),
 
     CATAPULTA_SHURIKEN("Catapulta Shuriken", 35, 90, false, 5, 1, 4),
     CATAPULTA_VENGADORA("Catapulta Vengadora", 40, 95, false, 5, 1, 4),
@@ -49,7 +49,7 @@ public enum ListaArmas {
 
     RIFLE_DE_PULSO("Rifle de Pulso", 45, 95, false, 6, 1, 2),
     CARABINA_PULSO("Carabina Pulso", 40, 90, false, 5, 1, 2),
-    CANON_ROTATIVO("Cañón Rotativo", 30, 80, false, 10, 99, 6),
+    CANON_ROTATIVO("Cañón Rotativo", 30, 80, false, 10, 5, 6),
     RIFLE_PLASMA_TAU("Rifle Plasma Tau", 60, 85, false, 4, 1, 2),
     RIFLE_FERROVIARIO("Rifle Ferroviario", 100, 98, false, 1, 1, 1),
     BASTON_DEL_HONOR("Bastón del Honor", 30, 90, true, 0, 1, 2),
@@ -57,9 +57,9 @@ public enum ListaArmas {
     AUTOPISTOLA("Autopistola", 25, 80, false, 4, 1, 4),
     BOLTER_PESADO("Bólter Pesado", 45, 75, false, 5, 1, 5),
     HACHA_SIERRA("Hacha Sierra", 60, 85, true, 0, 1, 2),
-    LANZA_PLAGAS("Lanza-plagas", 40, 70, false, 3, 99, 1),
-    BACULO_DE_CAMBIO("Báculo de Cambio", 35, 90, false, 0, 99, 1),
-    GARRAS_MUTADAS("Garras Mutadas", 55, 65, true, 0, 99, 3);
+    LANZA_PLAGAS("Lanza-plagas", 40, 70, false, 3, 3, 1),
+    BACULO_DE_CAMBIO("Báculo de Cambio", 35, 90, false, 0, 3, 1),
+    GARRAS_MUTADAS("Garras Mutadas", 55, 65, true, 0, 3, 3);
 
     private final String nombre;
     private final int dañoBase;

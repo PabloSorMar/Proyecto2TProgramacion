@@ -119,8 +119,25 @@ public class Entidad {
         this.habilidades = habilidades;
     }
 
+    // Devuelve el codigo ANSI de color segun la faccion de la entidad
+    public String getColorFaccion() {
+        switch (this.faccion) {
+            case "Astra Militarum": return "\u001B[32m";  // Verde
+            case "Deathwatch":      return "\u001B[96m";  // Cian brillante
+            case "Orkos":           return "\u001B[93m";  // Amarillo
+            case "Necrones":        return "\u001B[34m";  // Azul
+            case "Tir\u00e1nidos":     return "\u001B[35m";  // Magenta
+            case "Aeldari":         return "\u001B[94m";  // Azul brillante
+            case "T'au":            return "\u001B[33m";  // Naranja/Amarillo
+            case "Caos":            return "\u001B[31m";  // Rojo
+            default:               return "\u001B[37m";  // Blanco
+        }
+    }
+
     public void RealizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje) {
-        System.out.println("Turno de " + this.getNombre());
+        String COLOR = getColorFaccion();
+        String RESET = "\u001B[0m";
+        System.out.println(COLOR + "Turno de " + this.getNombre() + RESET);
         if (this.getDefendido()) {
             this.setDefendido(false);
         }
@@ -164,8 +181,22 @@ public class Entidad {
                 }
 
                 if (aliados.contains(personaje)) {
+                    // Heroe ataca a enemigos
+                    if (enemigos.isEmpty()) {
+                        System.out.println("  No hay enemigos disponibles.");
+                        return;
+                    }
                     for (int i = 0; i < armaAUsar.getCantidadObjetivos(); i++) {
+                        if (enemigos.isEmpty()) break;
+                        // Elegir un objetivo vivo aleatoriamente
                         int objetivo_aleatorio = ran.nextInt(0, enemigos.size());
+                        // Si el objetivo ya esta muerto (vida <= 0), buscar otro
+                        int intentos = 0;
+                        while (enemigos.get(objetivo_aleatorio).getVida() <= 0 && intentos < enemigos.size()) {
+                            objetivo_aleatorio = (objetivo_aleatorio + 1) % enemigos.size();
+                            intentos++;
+                        }
+                        if (enemigos.get(objetivo_aleatorio).getVida() <= 0) break; // Todos muertos
                         System.out.print(
                                 "Objetivo " + (i + 1) + ": " + enemigos.get(objetivo_aleatorio).getNombre() + "\n");
                         for (int j = 0; j < armaAUsar.getNumAtaques(); j++) {
@@ -205,28 +236,24 @@ public class Entidad {
                                         System.out.println("No golpea al objetivo el ataque ");
                                     }
                                 } else {
-                                    if (!objetivo.getArma().getEsMelee()) {
-                                        System.out.println("EL objetivo esta a distancia, no le puede atacar");
-                                    } else {
-                                        if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
-                                            if (ran.nextInt(1, 7) == 1) {
-                                                System.out.println("CRITICO");
-                                                int daño = armaAUsar.getDaño();
-                                                int daño_final = daño * 2 - blindajeEfectivo;
-                                                if (daño_final < 0)
-                                                    daño_final = 0;
-                                                objetivo.setVida(objetivo.getVida() - daño_final);
-                                            } else {
-                                                System.out.println("Golpe normal");
-                                                int daño = armaAUsar.getDaño();
-                                                int daño_final = daño - blindajeEfectivo;
-                                                if (daño_final < 0)
-                                                    daño_final = 0;
-                                                objetivo.setVida(objetivo.getVida() - daño_final);
-                                            }
+                                    if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
+                                        if (ran.nextInt(1, 7) == 1) {
+                                            System.out.println("CRITICO");
+                                            int daño = armaAUsar.getDaño();
+                                            int daño_final = daño * 2 - blindajeEfectivo;
+                                            if (daño_final < 0)
+                                                daño_final = 0;
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
                                         } else {
-                                            System.out.println("No golpea al objetivo el ataque ");
+                                            System.out.println("Golpe normal");
+                                            int daño = armaAUsar.getDaño();
+                                            int daño_final = daño - blindajeEfectivo;
+                                            if (daño_final < 0)
+                                                daño_final = 0;
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
                                         }
+                                    } else {
+                                        System.out.println("No golpea al objetivo el ataque ");
                                     }
                                 }
 
@@ -234,8 +261,22 @@ public class Entidad {
                         }
                     }
                 } else {
+                    // Enemigo ataca a aliados
+                    if (aliados.isEmpty()) {
+                        System.out.println("  No hay aliados disponibles.");
+                        return;
+                    }
                     for (int i = 0; i < armaAUsar.getCantidadObjetivos(); i++) {
+                        if (aliados.isEmpty()) break;
+                        // Elegir un objetivo vivo aleatoriamente
                         int objetivo_aleatorio = ran.nextInt(0, aliados.size());
+                        // Si el objetivo ya esta muerto (vida <= 0), buscar otro
+                        int intentos = 0;
+                        while (aliados.get(objetivo_aleatorio).getVida() <= 0 && intentos < aliados.size()) {
+                            objetivo_aleatorio = (objetivo_aleatorio + 1) % aliados.size();
+                            intentos++;
+                        }
+                        if (aliados.get(objetivo_aleatorio).getVida() <= 0) break; // Todos muertos
                         System.out.print(
                                 "Objetivo " + (i + 1) + ": " + aliados.get(objetivo_aleatorio).getNombre() + "\n");
                         for (int j = 0; j < armaAUsar.getNumAtaques(); j++) {
@@ -275,28 +316,24 @@ public class Entidad {
                                         System.out.println("No golpea al objetivo el ataque ");
                                     }
                                 } else {
-                                    if (!objetivo.getArma().getEsMelee()) {
-                                        System.out.println("EL objetivo esta a distancia, no le puede atacar");
-                                    } else {
-                                        if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
-                                            if (ran.nextInt(1, 7) == 1) {
-                                                System.out.println("CRITICO");
-                                                int daño = armaAUsar.getDaño();
-                                                int daño_final = daño * 2 - blindajeEfectivo;
-                                                if (daño_final < 0)
-                                                    daño_final = 0;
-                                                objetivo.setVida(objetivo.getVida() - daño_final);
-                                            } else {
-                                                System.out.println("Golpe normal");
-                                                int daño = armaAUsar.getDaño();
-                                                int daño_final = daño - blindajeEfectivo;
-                                                if (daño_final < 0)
-                                                    daño_final = 0;
-                                                objetivo.setVida(objetivo.getVida() - daño_final);
-                                            }
+                                    if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
+                                        if (ran.nextInt(1, 7) == 1) {
+                                            System.out.println("CRITICO");
+                                            int daño = armaAUsar.getDaño();
+                                            int daño_final = daño * 2 - blindajeEfectivo;
+                                            if (daño_final < 0)
+                                                daño_final = 0;
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
                                         } else {
-                                            System.out.println("No golpea al objetivo el ataque ");
+                                            System.out.println("Golpe normal");
+                                            int daño = armaAUsar.getDaño();
+                                            int daño_final = daño - blindajeEfectivo;
+                                            if (daño_final < 0)
+                                                daño_final = 0;
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
                                         }
+                                    } else {
+                                        System.out.println("No golpea al objetivo el ataque ");
                                     }
                                 }
 

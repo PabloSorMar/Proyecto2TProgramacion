@@ -72,4 +72,7 @@ public enum ListaEnemigos {
         List<Habilidades> habsGeneradas = habilidades.stream().map(ListaHabilidades::crearInstancia).toList();
         return new Entidad(nombre, faccion, vida, arma.crearInstancia(), armadura.crearInstancia(), habsGeneradas);
     }
+
+    public String getFaccion() { return this.faccion; }
+    public String getNombre() { return this.nombre; }
 }

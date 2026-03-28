@@ -42,4 +42,7 @@ public enum ListaHeroes {
         List<Habilidades> habsGeneradas = habilidades.stream().map(ListaHabilidades::crearInstancia).toList();
         return new Heroe(nombre, faccion, vida, arma1.crearInstancia(), armadura.crearInstancia(), habsGeneradas, arma2.crearInstancia());
     }
+
+    public String getFaccion() { return this.faccion; }
+    public String getNombre() { return this.nombre; }
 }
