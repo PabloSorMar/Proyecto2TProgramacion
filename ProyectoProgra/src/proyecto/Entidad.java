@@ -241,42 +241,20 @@ public class Entidad {
                         for (int j = 0; j < armaAUsar.getNumAtaques(); j++) {
                             System.out.println("Ataque numero " + (j + 1));
                             Entidad objetivo = aliados.get(objetivo_aleatorio);
-                            int blindajeEfectivo = objetivo.getDefendido()
-                                    ? objetivo.getArmadura().getBlindaje() * 3
-                                    : objetivo.getArmadura().getBlindaje();
-                            if (!armaAUsar.getEsMelee()) {
-                                if (armaAUsar.getMunicionAct() <= 0) {
-                                    System.out.println(
-                                            armaAUsar.getNombre() + " sin municion, recargando y fin de turno!");
-                                    armaAUsar.setMunicionAct(armaAUsar.getMunicionMax());
-                                    return;
-                                }
-                                if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
-                                    armaAUsar.setMunicionAct(armaAUsar.getMunicionAct() - 1);
-                                    if (ran.nextInt(1, 7) == 1) {
-                                        System.out.println("CRITICO");
-                                        int daño = armaAUsar.getDaño();
-                                        int daño_final = daño * 2 - blindajeEfectivo;
-                                        if (daño_final < 0)
-                                            daño_final = 0;
-                                        objetivo.setVida(objetivo.getVida() - daño_final);
-                                    } else {
-                                        System.out.println("Golpe normal");
-                                        int daño = armaAUsar.getDaño();
-                                        int daño_final = daño - blindajeEfectivo;
-                                        if (daño_final < 0)
-                                            daño_final = 0;
-                                        objetivo.setVida(objetivo.getVida() - daño_final);
-                                    }
-                                } else {
-                                    armaAUsar.setMunicionAct(armaAUsar.getMunicionAct() - 1);
-                                    System.out.println("No golpea al objetivo el ataque ");
-                                }
+                            int blindajeEfectivo;
+                            if (objetivo.getDefendido()) {
+                                blindajeEfectivo = objetivo.getArmadura().getBlindaje() * 2;
                             } else {
-                                if (!objetivo.getArma().getEsMelee()) {
-                                    System.out.println("EL objetivo esta a distancia, no le puede atacar");
-                                } else {
+                                blindajeEfectivo = objetivo.getArmadura().getBlindaje();
+                                if (!armaAUsar.getEsMelee()) {
+                                    if (armaAUsar.getMunicionAct() <= 0) {
+                                        System.out.println(
+                                                armaAUsar.getNombre() + " sin municion, recargando y fin de turno!");
+                                        armaAUsar.setMunicionAct(armaAUsar.getMunicionMax());
+                                        return;
+                                    }
                                     if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
+                                        armaAUsar.setMunicionAct(armaAUsar.getMunicionAct() - 1);
                                         if (ran.nextInt(1, 7) == 1) {
                                             System.out.println("CRITICO");
                                             int daño = armaAUsar.getDaño();
@@ -293,11 +271,36 @@ public class Entidad {
                                             objetivo.setVida(objetivo.getVida() - daño_final);
                                         }
                                     } else {
+                                        armaAUsar.setMunicionAct(armaAUsar.getMunicionAct() - 1);
                                         System.out.println("No golpea al objetivo el ataque ");
                                     }
+                                } else {
+                                    if (!objetivo.getArma().getEsMelee()) {
+                                        System.out.println("EL objetivo esta a distancia, no le puede atacar");
+                                    } else {
+                                        if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
+                                            if (ran.nextInt(1, 7) == 1) {
+                                                System.out.println("CRITICO");
+                                                int daño = armaAUsar.getDaño();
+                                                int daño_final = daño * 2 - blindajeEfectivo;
+                                                if (daño_final < 0)
+                                                    daño_final = 0;
+                                                objetivo.setVida(objetivo.getVida() - daño_final);
+                                            } else {
+                                                System.out.println("Golpe normal");
+                                                int daño = armaAUsar.getDaño();
+                                                int daño_final = daño - blindajeEfectivo;
+                                                if (daño_final < 0)
+                                                    daño_final = 0;
+                                                objetivo.setVida(objetivo.getVida() - daño_final);
+                                            }
+                                        } else {
+                                            System.out.println("No golpea al objetivo el ataque ");
+                                        }
+                                    }
                                 }
-                            }
 
+                            }
                         }
                     }
                 }
