@@ -11,7 +11,7 @@ public class Main {
         List<Entidad> aliados = new ArrayList<>();
         List<Entidad> personajes = new ArrayList<>();
         Armaduras armadura1 = new Armaduras("Ligera", 20, 20);
-        Arma arma1 = new Arma("Espada Sierra", 20, 100, false, 2, 1, null, 1);
+        Arma arma1 = new Arma("Espada Sierra", 20, 100, false, 2, 1, 1);
 
         Habilidades hab1 = new Habilidades("hab1", 2, " ", true, "ofensiva");
         List<Habilidades> habilidades = new ArrayList<>();
