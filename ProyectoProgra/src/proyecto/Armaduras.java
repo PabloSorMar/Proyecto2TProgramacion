@@ -14,7 +14,7 @@ public class Armaduras {
 
     //SETERS Y GETTERS
     public void setNombre(String nombre){this.nombre = nombre;}
-    public void setArmadura(int blindaje){this.blindaje = blindaje;}
+    public void setBlindaje(int blindaje){this.blindaje = blindaje;}
     public void setVelocidad(int velocidad){this.velocidad = velocidad;}
    
     public String getnombre(){ return this.nombre;}

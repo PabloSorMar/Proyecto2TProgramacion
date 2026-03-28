@@ -5,16 +5,18 @@ public class Habilidades {
     private int cooldownBase;
     private int cooldownActual;
     private String efecto;
-    private boolean distancia;
-    private String tipo;
 
-    public Habilidades(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
+    private String tipo;
+    private int precision;
+
+    public Habilidades(String nombre, int cooldownBase, String efecto,  String tipo, int precision) {
         this.nombre = nombre;
         this.cooldownBase = cooldownBase;
         this.cooldownActual = 0; // Starts ready
         this.efecto = efecto;
-        this.distancia = distancia;
+
         this.tipo = tipo;
+        this.precision = precision;
     }
 
     public String getNombre() {
@@ -33,12 +35,13 @@ public class Habilidades {
         return this.efecto;
     }
 
-    public boolean getDistancia() {
-        return this.distancia;
-    }
+
 
     public String getTipo() {
         return this.tipo;
+    }
+    public int getPrecision() {
+        return this.precision;
     }
 
     public void setNombre(String nombre) {
@@ -57,13 +60,15 @@ public class Habilidades {
         this.efecto = efecto;
     }
 
-    public void setDistancia(boolean distancia) {
-        this.distancia = distancia;
-    }
+
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+      public void setPrecision(int precision) {
+        this.precision = precision;
+    }
+
 
     public void reducirCooldown() {
         if (this.cooldownActual > 0) {
