@@ -4,6 +4,7 @@ import java.util.Random;
 
 public  class Entidad{
     private String nombre;
+    private String faccion;
     private int vida;
     private int turnoStun;
     private int turnoHemorragia;
@@ -12,9 +13,9 @@ public  class Entidad{
     private Arma arma;
     private Armaduras armadura;
     private List<Habilidades> habilidades;
-
-    Entidad(String nombre, int vida,  Arma arma, Armaduras armadura, List<Habilidades> habilidades){
+    Entidad(String nombre, String faccion, int vida,  Arma arma, Armaduras armadura, List<Habilidades> habilidades){
         this.nombre = nombre;
+        this.faccion = faccion;
         this.vida = vida;
         this.turnoStun = 0;
         this.turnoHemorragia = 0;
@@ -27,6 +28,7 @@ public  class Entidad{
     
     //SETTERS Y GETTERS
     public String getNombre(){return this.nombre;}
+    public String getFaccion(){return this.faccion;}
     public int getVida(){return this.vida;}
 
     public int getTurnoStun(){return this.turnoStun;}
@@ -38,6 +40,7 @@ public  class Entidad{
     public List<Habilidades> getHabilidades(){return this.habilidades;}
 
     public void setNombre(String nombre){this.nombre = nombre;}
+    public void setFaccion(String faccion){this.faccion = faccion;}
     public void setVida(int vida){this.vida = vida;}
     public void setTurnoStun(int turnoStun){this.turnoStun = turnoStun;}
     public void setTurnoHemorragia(int turnoHemorragia){this.turnoHemorragia = turnoHemorragia;}
