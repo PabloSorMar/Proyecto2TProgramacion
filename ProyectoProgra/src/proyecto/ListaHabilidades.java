@@ -2,27 +2,37 @@ package proyecto;
 
 public enum ListaHabilidades {
     APUNTAR("Apuntar", 2, "Mejora la probabilidad de impacto en un +20% para el siguiente ataque.", true, "buf"),
-    COBERTURA("Cobertura", 2, "Reduce la probabilidad de impacto del enemigo en un -15% durante 2 turnos.", false, "buf"),
+    COBERTURA("Cobertura", 2, "Reduce la probabilidad de impacto del enemigo en un -15% durante 2 turnos.", false,
+            "buf"),
     CULATAZO("Culatazo", 3, "Ataque cuerpo a cuerpo (15 Daño) que provoca Stun durante 1 turno.", false, "ofensiva"),
     CARRERA("Carrera", 3, "Aumenta la velocidad en +50 puntos el siguiente turno.", false, "movimiento"),
     ALENTAR("Alentar", 4, "Potencia el daño de todos los aliados en un +15% durante ese turno.", false, "buf"),
-    TIRO_CERTERO("Tiro certero", 3, "Un disparo con +30% de acierto y probabilidad de Crítico (Daño x2).", true, "ofensiva"),
+    TIRO_CERTERO("Tiro certero", 3, "Un disparo con +30% de acierto y probabilidad de Crítico (Daño x2).", true,
+            "ofensiva"),
 
-    DISCURSO_DE_MIEDO("Discurso de Miedo", 4, "Reduce la probabilidad de impacto del objetivo en un -20% durante 3 turnos.", true, "debuf"),
-    MURO_ANDANTE("Muro Andante", 5, "Se posiciona frente a un aliado; recibe el 100% de los ataques dirigidos a él (1T).", false, "buf"),
-    CUBRIRSE("Cubrirse", 3, "Aumenta +30% la probabilidad de que los ataques den en armadura (2 turnos).", false, "buf"),
+    DISCURSO_DE_MIEDO("Discurso de Miedo", 4,
+            "Reduce la probabilidad de impacto del objetivo en un -20% durante 3 turnos.", true, "debuf"),
+    MURO_ANDANTE("Muro Andante", 5,
+            "Se posiciona frente a un aliado; recibe el 100% de los ataques dirigidos a él (1T).", false, "buf"),
+    CUBRIRSE("Cubrirse", 3, "Aumenta +30% la probabilidad de que los ataques den en armadura (2 turnos).", false,
+            "buf"),
     DISPARO_DE_HUMO("Disparo de humo", 4, "Reduce el acierto enemigo en un -40% durante 1 turno.", true, "debuf"),
     PUNETAZO("Puñetazo", 2, "Golpe de 35 Daño que aplica Stun por 1 turno.", false, "ofensiva"),
-    BARRERA_PSIQUICA("Barrera Psíquica", 5, "Niega el 100% del daño recibido a un objetivo durante 1 turno.", true, "buf"),
+    BARRERA_PSIQUICA("Barrera Psíquica", 5, "Niega el 100% del daño recibido a un objetivo durante 1 turno.", true,
+            "buf"),
 
-    EXPLOSION_PSIQUICA("Explosión Psíquica", 4, "Inflige 60 Daño psíquico a un solo objetivo (ignora armadura).", true, "ofensiva"),
+    EXPLOSION_PSIQUICA("Explosión Psíquica", 4, "Inflige 60 Daño psíquico a un solo objetivo (ignora armadura).", true,
+            "ofensiva"),
     NERVIO_DE_ACERO("Nervio de acero", 3, "Aumenta la esquiva en +25% durante 2 turnos.", false, "buf"),
     HONDA_DE_ENERGIA("Honda de Energía", 4, "Daño general de 20 a todos los enemigos.", true, "ofensiva"),
-    ALTERAR_SENTIDOS("Alterar sentidos", 3, "Confunde al enemigo disminuyendo su acierto en un -25% (2T).", true, "debuf"),
+    ALTERAR_SENTIDOS("Alterar sentidos", 3, "Confunde al enemigo disminuyendo su acierto en un -25% (2T).", true,
+            "debuf"),
     VALOR_CADIANO("Valor Cadiano", 0, "Mejora la reducción de daño por armadura en un +20% (2 turnos).", false, "buf"),
-    MAESTRIA_EN_ARMAS("Maestría en Armas", 4, "El personaje puede atacar sin gastar munición durante este turno.", false, "buf"),
+    MAESTRIA_EN_ARMAS("Maestría en Armas", 4, "El personaje puede atacar sin gastar munición durante este turno.",
+            false, "buf"),
 
-    SENTINEL_PISOTON("Sentinel: Pisotón", 4, "Ataque de área (30 Daño). Aplica Stun si el enemigo tiene poca armadura.", false, "ofensiva"),
+    SENTINEL_PISOTON("Sentinel: Pisotón", 4, "Ataque de área (30 Daño). Aplica Stun si el enemigo tiene poca armadura.",
+            false, "ofensiva"),
     REFLEJOS_RELAMPAGO("Reflejos relámpago", 3, "Aumenta la velocidad en +60 puntos el siguiente turno.", false, "buf"),
     SACRIFICIO("Sacrificio", 99, "Recupera 70 de Vida a un aliado eliminando al usuario.", false, "curacion"),
     FANATISMO("Fanatismo", 3, "Aumenta el Daño un 10% durante 2 turnos.", false, "buf"),
@@ -61,7 +71,8 @@ public enum ListaHabilidades {
     CHISPAZO("Chispazo", 3, "Daño eléctrico de 15 con probabilidad de Stun (1T).", true, "ofensiva"),
     ENJAMBRAR("Enjambrar", 4, "Reduce la Velocidad enemiga a 0 durante 1 turno.", true, "debuf"),
     REPARAR_NECRON("Reparar (Necrón)", 99, "Se sacrifica para curar 40 de Vida a un Necrón aliado.", false, "curacion"),
-    AUTORREPARACION("Autorreparación", 0, "Recupera 10 de Vida al inicio de cada turno de forma pasiva.", false, "curacion"),
+    AUTORREPARACION("Autorreparación", 0, "Recupera 10 de Vida al inicio de cada turno de forma pasiva.", false,
+            "curacion"),
     ESQUIVA_NECRON("Esquiva (Necrón)", 3, "Aumenta su propia Esquiva en un +30% por 1 turno.", false, "buf"),
 
     INSTINTO("Instinto", 0, "Gana +15 de Precisión si hay un Guerrero Tiránido cerca.", false, "buf"),
@@ -89,8 +100,7 @@ public enum ListaHabilidades {
     HOSTIGAR("Hostigar", 4, "Permite Mover - Atacar - Mover en el mismo turno.", false, "movimiento"),
     RETROCOHETES("Retrocohetes", 3, "Permite saltar y alejarse tras realizar un ataque.", false, "movimiento"),
     MISILES("Misiles", 4, "Daño de área de 40 repartido entre los enemigos.", true, "ofensiva"),
-    
-    // EXTRAS Y FALTANTES (Deathwatch, Astra, Orkos, Necrones, T'au, Aeldari, Chaos, etc.)
+
     ARPON_BRAZO("Arpón de brazo", 3, "Atrae al enemigo para cuerpo a cuerpo", false, "ofensiva"),
     GOLPE_ESCUDO("Golpe de escudo", 3, "Golpea y puede causar Stun", false, "ofensiva"),
     LANZAR_HACHA("Lanzar Hacha", 2, "Ataque a distancia fuerte", true, "ofensiva"),
@@ -153,7 +163,8 @@ public enum ListaHabilidades {
     SENSORES("Sensores", 2, "Niega bonus de cobertura al enemigo", false, "buf"),
     MULTIBLANCO("Multiblanco", 3, "Permite que el arma principal dispare a varios sin penalía", true, "buf"),
     MUNICION("Munición", 2, "Restaura la munición a 100% de la unidad y los aliados", false, "buf"),
-    ANCLAJE("Anclaje", 0, "Fija el arma pesada imposibilitando el movimiento a cambio de precisión total", false, "buf"),
+    ANCLAJE("Anclaje", 0, "Fija el arma pesada imposibilitando el movimiento a cambio de precisión total", false,
+            "buf"),
     LARGA_DISTANCIA("Larga distancia", 3, "Disparo desde zonas no alcanzables temporalmente", true, "ofensiva"),
     BLINDAJE_PLUS("Blindaje+", 4, "Aumenta pasivamente la negación de golpe crítico de forma brutal", false, "buf"),
     INVOCACION("Invocación", 5, "Genera unidades amigas de apoyo menor cerca de él", false, "ofensiva"),
@@ -165,7 +176,23 @@ public enum ListaHabilidades {
     ESCUDO_DISFORME("Escudo Disforme", 4, "Escudo demoníaco que rebota letalidad a distancia corta", false, "buf"),
     ILUSION("Ilusión", 3, "Reescribe estadísticamente fallos forzados en enemigos al atacar", false, "debuf"),
     EMBESTIDA("Embestida", 3, "Atropella por completo a las filas aplastando coberturas", false, "ofensiva"),
-    ALARIDO("Alarido", 3, "Anula la capacidad de ataque (silencio/terror) en área masiva durante el turno", true, "debuf");
+    ALARIDO("Alarido", 3, "Anula la capacidad de ataque (silencio/terror) en área masiva durante el turno", true,
+            "debuf"),
+
+    PROTOCOLO("Protocolo", 3, "Aumenta la armadura temporalmente", false, "buf"),
+    ENFOQUE("Enfoque", 2, "Aumenta la precisión para el siguiente disparo", false, "buf"),
+    TELETRANSPORTE("Teletransporte", 4, "Movimiento instantáneo ignorando obstáculos", false, "movimiento"),
+    RAYO_SOLAR("Rayo Solar", 5, "Ataque de área devastador", true, "ofensiva"),
+    EMBOSCADA("Emboscada", 4, "Ataque con bonificador de daño desde el sigilo", false, "ofensiva"),
+    CAMUFLAJE("Camuflaje", 3, "Aumenta la esquiva considerablemente", false, "buf"),
+    NUBE_DE_MOSCAS("Nube de moscas", 3, "Reduce la precisión y esquiva de enemigos en área", true, "debuf"),
+    VOMITO_CORROSIVO("Vómito corrosivo", 3, "Ataque de área que causa daño y reduce armadura", true, "ofensiva"),
+    RAYO_DE_CAMBIO("Rayo de cambio", 4, "Ataque de energía disforme impredecible", true, "ofensiva"),
+    MUTACION("Mutación", 0, "Regenera salud pasivamente y aumenta daño", false, "curacion"),
+    CIRUGIA_EN_COMBATE("Cirugía en Combate", 3, "Cura a un aliado gravemente herido", false, "curacion"),
+    EUTANASIA("Eutanasia", 4, "Ejecuta a un objetivo con menos del 20% de salud", false, "ofensiva"),
+    RECONOCIMIENTO("Reconocimiento", 2, "Aumenta la precisión de todo el equipo contra un objetivo", false, "buf"),
+    PUNTO_DEBIL("Punto Débil", 3, "Ataque que ignora completamente la armadura del enemigo", false, "ofensiva");
 
     private final String nombre;
     private final int cooldownBase;
