@@ -9,10 +9,12 @@ public  class Entidad{
     private int turnoStun;
     private int turnoHemorragia;
     private int turnoVeneno;
+    private int turnoCuracion;
     private boolean defendido;
     private Arma arma;
     private Armaduras armadura;
     private List<Habilidades> habilidades;
+    
     Entidad(String nombre, String faccion, int vida,  Arma arma, Armaduras armadura, List<Habilidades> habilidades){
         this.nombre = nombre;
         this.faccion = faccion;
@@ -20,6 +22,7 @@ public  class Entidad{
         this.turnoStun = 0;
         this.turnoHemorragia = 0;
         this.turnoVeneno = 0;
+        this.turnoCuracion = 0;
         this.defendido = false;
         this.arma = arma;
         this.armadura = armadura;
@@ -34,6 +37,7 @@ public  class Entidad{
     public int getTurnoStun(){return this.turnoStun;}
     public int getTurnoHemorragia(){return this.turnoHemorragia;}
     public int getTurnoVeneno(){return this.turnoVeneno;}
+    public int getTurnoCuracion(){return this.turnoCuracion;}
     public boolean getDefendido(){return this.defendido;}
     public Arma getArma(){return this.arma;}
     public Armaduras getArmadura(){return this.armadura;}
@@ -45,6 +49,7 @@ public  class Entidad{
     public void setTurnoStun(int turnoStun){this.turnoStun = turnoStun;}
     public void setTurnoHemorragia(int turnoHemorragia){this.turnoHemorragia = turnoHemorragia;}
     public void setTurnoVeneno(int turnoVeneno){this.turnoVeneno = turnoVeneno;}
+    public void setTurnoCuracion(int turnoCuracion){this.turnoCuracion = turnoCuracion;}
     public void setDefendido(boolean defendido){this.defendido = defendido;}
     public void setArma(Arma arma){this.arma = arma;}
     public void setArmadura(Armaduras armadura){this.armadura = armadura;}
@@ -53,7 +58,9 @@ public  class Entidad{
     public void RealizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje)
     {
         System.out.println("Turno de " + this.getNombre());
-        
+        if (this.getDefendido()) {
+            this.setDefendido(false);
+        }
         //Primero efectos acvito de daño en si mismo
         if(this.getTurnoStun() > 0)
         {

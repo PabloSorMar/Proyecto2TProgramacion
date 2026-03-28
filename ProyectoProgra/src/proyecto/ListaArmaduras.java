@@ -45,17 +45,17 @@ public enum ListaArmaduras {
     TUNICA_DISFORME("Túnica Disforme", 100, 150),
     PIEL_MUTADA("Piel Mutada", 150, 140);
 
-    private final String nombre;
-    private final int puntosDefensa;
-    private final int bonoVelocidad;
+    private  final String nombre;
+    private  final int blindaje;
+    private  final int velocidad;
 
-    ListaArmaduras(String nombre, int puntosDefensa, int bonoVelocidad) {
+    ListaArmaduras(String nombre, int blindaje, int velocidad) {
         this.nombre = nombre;
-        this.puntosDefensa = puntosDefensa;
-        this.bonoVelocidad = bonoVelocidad;
+        this.blindaje = blindaje;
+        this.velocidad = velocidad;
     }
 
     public Armaduras crearInstancia() {
-        return new Armaduras(nombre, puntosDefensa, bonoVelocidad);
+        return new Armaduras(nombre, blindaje, velocidad);
     }
 }

@@ -17,8 +17,8 @@ public class Main {
         List<Habilidades> habilidades = new ArrayList<>();
         habilidades.add(hab1);
 
-        Entidad aliado1 = new Entidad("aliado 1",100,arma1,armadura1,habilidades);
-        Entidad enemigo1 = new Entidad("enemigo 1",100,arma1,armadura1,habilidades);
+        Entidad aliado1 = new Entidad("aliado 1","fac1" ,100,arma1,armadura1,habilidades);
+        Entidad enemigo1 = new Entidad("enemigo 1","fac2",100,arma1,armadura1,habilidades);
 
         aliados.add(aliado1);
         enemigos.add(enemigo1);
