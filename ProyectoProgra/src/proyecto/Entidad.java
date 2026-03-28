@@ -72,6 +72,7 @@ public  class Entidad{
             //Aleatorio para ver que hace
             Random ran = new Random();
              int accion =  ran.nextInt(0,4);
+
             if(accion == 0)
             {
                 System.out.println(this.getNombre() + " decide atacar con su arma");
@@ -80,23 +81,174 @@ public  class Entidad{
                     for(int i = 0; i < this.getArma().getCantidadObjetivos();i++)
                     {
                         int objetivo_aleatorio = ran.nextInt(0,enemigos.size());
+                        System.out.print("Objetivo " + i+1 +": " + enemigos.get(objetivo_aleatorio).getNombre());
+                        if (enemigos.get(objetivo_aleatorio).getDefendido()) 
+                        {
+                            System.out.println("El objetivo esta defendido, no puede recibir daño");
+                            continue;
+                        }
                         for(int j = 0; j < this.getArma().getNumAtaques();j++)
                         {
-                            enemigos.get(objetivo_aleatorio).setVida(enemigos.get(objetivo_aleatorio).getVida() - this.getArma().getDaño());
+                            System.out.println("Ataque numero " + j);
+                            Entidad objetivo = enemigos.get(objetivo_aleatorio);
+                            if (!this.arma.getEsMelee()) 
+                            {
+                                if (ran.nextInt(0,100) < this.getArma().getPrecision()) 
+                                {
+                                    if (ran.nextInt(1,7) == 1) 
+                                    {
+                                        System.out.println("CRITICO");
+                                        int daño = this.getArma().getDaño();
+                                        int daño_final = daño * 2 - objetivo.getArmadura().getBlindaje();
+                                        if (daño_final < 0 ) {
+                                            daño_final = 0;
+                                        }
+                                        objetivo.setVida(objetivo.getVida() - daño_final);
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Golpe normal");
+                                        int daño = this.getArma().getDaño();
+                                        int daño_final = daño  - objetivo.getArmadura().getBlindaje();
+                                        if (daño_final < 0 ) {
+                                            daño_final = 0;
+                                        }
+                                        objetivo.setVida(objetivo.getVida() - daño_final);
+                                    }
+                                }
+                                else
+                                {
+                                    System.out.println("No golpea al objetivo el ataque ");
+                                }
+                            }
+                            else
+                            {
+                                if (!objetivo.getArma().getEsMelee()) 
+                                {
+                                    System.out.println("EL objetivo esta a distancia, so le puede atacar");    
+                                }
+                                else
+                                {
+                                    if (ran.nextInt(0,100) < this.getArma().getPrecision()) 
+                                    {
+                                        if (ran.nextInt(1,7) == 1) 
+                                        {
+                                            System.out.println("CRITICO");
+                                            int daño = this.getArma().getDaño();
+                                            int daño_final = daño * 2 - objetivo.getArmadura().getBlindaje();
+                                            if (daño_final < 0 ) {
+                                                daño_final = 0;
+                                            }
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
+                                        }
+                                        else
+                                        {
+                                            System.out.println("Golpe normal");
+                                            int daño = this.getArma().getDaño();
+                                            int daño_final = daño  - objetivo.getArmadura().getBlindaje();
+                                            if (daño_final < 0 ) {
+                                                daño_final = 0;
+                                            }
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        System.out.println("No golpea al objetivo el ataque ");
+                                    }                                
+                                }
+                            }
+                            
+                            
                         }
                     }
                 }
                 else
                 {
-                 for(int i = 0; i < this.getArma().getCantidadObjetivos();i++)
+                     for(int i = 0; i < this.getArma().getCantidadObjetivos();i++)
                     {
-                      
                         int objetivo_aleatorio = ran.nextInt(0,aliados.size());
+                        System.out.print("Objetivo " + i+1 +": " + aliados.get(objetivo_aleatorio).getNombre());
+                        if (aliados.get(objetivo_aleatorio).getDefendido()) 
+                        {
+                            System.out.println("El objetivo esta defendido, no puede recibir daño");
+                            continue;
+                        }
                         for(int j = 0; j < this.getArma().getNumAtaques();j++)
                         {
-                            aliados.get(objetivo_aleatorio).setVida(aliados.get(objetivo_aleatorio).getVida() - this.getArma().getDaño());
+                            System.out.println("Ataque numero " + j);
+                            Entidad objetivo = aliados.get(objetivo_aleatorio);
+                            if (!this.arma.getEsMelee()) 
+                            {
+                                if (ran.nextInt(0,100) < this.getArma().getPrecision()) 
+                                {
+                                    if (ran.nextInt(1,7) == 1) 
+                                    {
+                                        System.out.println("CRITICO");
+                                        int daño = this.getArma().getDaño();
+                                        int daño_final = daño * 2 - objetivo.getArmadura().getBlindaje();
+                                        if (daño_final < 0 ) {
+                                            daño_final = 0;
+                                        }
+                                        objetivo.setVida(objetivo.getVida() - daño_final);
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Golpe normal");
+                                        int daño = this.getArma().getDaño();
+                                        int daño_final = daño  - objetivo.getArmadura().getBlindaje();
+                                        if (daño_final < 0 ) {
+                                            daño_final = 0;
+                                        }
+                                        objetivo.setVida(objetivo.getVida() - daño_final);
+                                    }
+                                }
+                                else
+                                {
+                                    System.out.println("No golpea al objetivo el ataque ");
+                                }
+                            }
+                            else
+                            {
+                                if (!objetivo.getArma().getEsMelee()) 
+                                {
+                                    System.out.println("EL objetivo esta a distancia, so le puede atacar");    
+                                }
+                                else
+                                {
+                                    if (ran.nextInt(0,100) < this.getArma().getPrecision()) 
+                                    {
+                                        if (ran.nextInt(1,7) == 1) 
+                                        {
+                                            System.out.println("CRITICO");
+                                            int daño = this.getArma().getDaño();
+                                            int daño_final = daño * 2 - objetivo.getArmadura().getBlindaje();
+                                            if (daño_final < 0 ) {
+                                                daño_final = 0;
+                                            }
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
+                                        }
+                                        else
+                                        {
+                                            System.out.println("Golpe normal");
+                                            int daño = this.getArma().getDaño();
+                                            int daño_final = daño  - objetivo.getArmadura().getBlindaje();
+                                            if (daño_final < 0 ) {
+                                                daño_final = 0;
+                                            }
+                                            objetivo.setVida(objetivo.getVida() - daño_final);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        System.out.println("No golpea al objetivo el ataque ");
+                                    }                                
+                                }
+                            }
+                            
+                            
                         }
-                    }   
+                    }
                 }
             }
             else if(accion == 1)
