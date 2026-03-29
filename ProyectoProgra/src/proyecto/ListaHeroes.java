@@ -35,6 +35,15 @@ public enum ListaHeroes {
     private final ListaArmaduras armadura;
     private final ListaArmas arma2;
 
+    /**
+     * Constructor interno para definir el perfil de datos de cada héroe.
+     * * @param faccion  Nombre de la facción (ej. "Deathwatch").
+     * @param nombre   Nombre descriptivo del héroe.
+     * @param vida     Salud base del personaje.
+     * @param arma1    Constante de {@link ListaArmas} para el equipo principal.
+     * @param armadura Constante de {@link ListaArmaduras} para la defensa.
+     * @param arma2    Constante de {@link ListaArmas} para el equipo secundario.
+     */
     ListaHeroes(String faccion, String nombre, int vida, ListaArmas arma1, ListaArmaduras armadura, ListaArmas arma2) {
         this.faccion = faccion;
         this.nombre = nombre;
@@ -44,6 +53,15 @@ public enum ListaHeroes {
         this.arma2 = arma2;
     }
 
+    /**
+     * Construye y devuelve una instancia operativa de la clase {@link Heroe}.
+     * <p>
+     * El proceso de creación incluye:
+     * 1. La inicialización de una lista de habilidades específicas según el caso ({@code switch}).
+     * 2. La transformación de las constantes de equipo en objetos reales mediante {@code crearInstancia()}.
+     * 3. La instanciación del objeto {@code Heroe} con soporte para doble armamento.
+     * * @return Un objeto {@link Heroe} completamente equipado y con sus habilidades aprendidas.
+     */
     public Heroe crearInstancia() {
         List<Habilidades> habs = new ArrayList<>();
         switch (this) {

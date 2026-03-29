@@ -23,6 +23,19 @@ public class Entidad {
     private Armaduras armadura;
     private List<Habilidades> habilidades;
 
+    /**
+     * Constructor para la clase Entidad.
+     * Inicializa una unidad de combate con sus estadísticas básicas, equipo y habilidades.
+     * Además, resetea todos los estados alterados y contadores de efectos temporales 
+     * (stun, hemorragia, veneno, curación) a su valor inicial (0 o falso), garantizando 
+     * que la entidad comience el encuentro en un estado neutral.
+     * @param nombre      El nombre identificativo de la entidad.
+     * @param faccion     La facción o bando al que pertenece (afecta a la selección de objetivos).
+     * @param vida        Los puntos de salud máximos iniciales.
+     * @param arma        El objeto {@link Arma} que portará la entidad para sus ataques básicos.
+     * @param armadura    El objeto {@link Armaduras} que define su capacidad defensiva.
+     * @param habilidades Una lista de objetos {@link Habilidades} disponibles para esta unidad.
+     */
     Entidad(String nombre, String faccion, int vida, Arma arma, Armaduras armadura, List<Habilidades> habilidades) {
         this.nombre = nombre;
         this.faccion = faccion;
@@ -141,14 +154,37 @@ public class Entidad {
         }
     }
 
+
+    /**
+     * Gestiona la lógica completa del turno de una entidad controlada por la IA.
+     * El flujo de ejecución sigue este orden estrictamente:
+     * Limpieza de estados: Se desactiva el estado defensivo del turno anterior.
+     * Verificación de incapacidad: Si la entidad está aturdida ({@code turnoStun > 0}), 
+     * pierde el turno y reduce el contador.
+     * Daño recurrente: Se aplica daño por hemorragia o veneno si los contadores son activos.
+     * Selección de acción aleatoria: Si puede actuar, elige una de las siguientes opciones:
+     * <b>Ataque (0):Selecciona un arma (incluyendo secundaria si es {@link Heroe}), 
+     * busca objetivos vivos y calcula daño, críticos y consumo de munición.
+     * Defender (1): Aumenta el blindaje efectivo para el siguiente turno.
+     * Habilidad (2): Elige una habilidad al azar y la ejecuta sobre el bando apropiado 
+     * según el tipo (ofensiva/buf).
+     * Recargar (3): Restaura la munición del arma actual.
+     * Pasar (4):</b>
+     *
+     * @param aliados   Lista de entidades que comparten bando con el ejecutor.
+     * @param enemigos  Lista de entidades hostiles para el ejecutor.
+     * @param personaje Referencia a la entidad que está actuando (usado para determinar bando).
+     */
     public void RealizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje) {
+        //Poner color segun la faccion del perosnaje 
         String COLOR = getColorFaccion();
         String RESET = "\u001B[0m";
         System.out.println(COLOR + "Turno de " + this.getNombre() + RESET);
+        //Comprobar si el personaje esta defendido para desactivar ese estado
         if (this.getDefendido()) {
             this.setDefendido(false);
         }
-        // Primero efectos acvito de daño en si mismo
+        // Primero efectos activo de daño en si mismo
         if (this.getTurnoStun() > 0) {
             System.out.println(this.getNombre() + " esta arturdido");
             setTurnoStun(getTurnoStun() - 1);
@@ -161,72 +197,79 @@ public class Entidad {
                 setVida(getVida() - 10);
                 setTurnoVeneno(getTurnoVeneno() - 1);
             }
+
+
             // Aleatorio para ver que hace
             Random ran = new Random();
             int accion = ran.nextInt(0, 5);
-
+            //Primera opcion, atacar con arma
             if (accion == 0) {
                 // Comprobar si es héroe y tiene segunda arma para decidir
                 Arma armaAUsar = this.getArma();
 
                 if (this instanceof Heroe) {
                     Heroe heroeActual = (Heroe) this;
-                    if (heroeActual.getArma2() != null) {
-                        if (ran.nextBoolean()) {
+                    if (heroeActual.getArma2() != null) {//SI existe arma2 pasaremos a esocger que arma usar
+                        if (ran.nextBoolean()) {//Segun el siguiente random escoger un arma y la guarda en armaAUsar
                             armaAUsar = heroeActual.getArma2();
                             System.out.println(this.getNombre() + " decide atacar con su ARMA SECUNDARIA: "
                                     + armaAUsar.getNombre());
-                        } else {
+                        } 
+                        else {
                             System.out.println(this.getNombre() + " decide atacar con su ARMA PRINCIPAL: "
                                     + armaAUsar.getNombre());
                         }
-                    } else {
+                    } 
+                    else {
                         System.out.println(this.getNombre() + " decide atacar con su arma: " + armaAUsar.getNombre());
                     }
-                } else {
+                } 
+                else {
                     System.out.println(this.getNombre() + " decide atacar con su arma: " + armaAUsar.getNombre());
                 }
-
+                //Comprobabos de que bando es el personaje que actua para posterioremente esocger sus objetivos dependiendo de su accion
                 if (aliados.contains(personaje)) {
                     // Heroe ataca a enemigos
                     if (enemigos.isEmpty()) {
                         System.out.println("  No hay enemigos disponibles.");
                         return;
                     }
-                    for (int i = 0; i < armaAUsar.getCantidadObjetivos(); i++) {
-                        if (enemigos.isEmpty()) break;
+                    for (int i = 0; i < armaAUsar.getCantidadObjetivos(); i++) {//Segun cantidad de ataques de arma, el for se hara varias veces
+                        if (enemigos.isEmpty()) {break;};
                         // Elegir un objetivo vivo aleatoriamente
                         int objetivo_aleatorio = ran.nextInt(0, enemigos.size());
                         // Si el objetivo ya esta muerto (vida <= 0), buscar otro
                         int intentos = 0;
+                        //Bucle que comprueba si un objetivo ha muerto, que la seleeccion de objetivo no falle al eleiminar el objetivo muerto
                         while (enemigos.get(objetivo_aleatorio).getVida() <= 0 && intentos < enemigos.size()) {
                             objetivo_aleatorio = (objetivo_aleatorio + 1) % enemigos.size();
                             intentos++;
                         }
-                        if (enemigos.get(objetivo_aleatorio).getVida() <= 0) break; // Todos muertos
+                        if (enemigos.get(objetivo_aleatorio).getVida() <= 0) {break;}; // Todos muertos
                         System.out.print(
                                 "Objetivo " + (i + 1) + ": " + enemigos.get(objetivo_aleatorio).getNombre() + "\n");
-                        for (int j = 0; j < armaAUsar.getNumAtaques(); j++) {
+
+                        for (int j = 0; j < armaAUsar.getNumAtaques(); j++) {//Bucle para atarcar al obejtivo la cantidad de veces segun el arma
                             System.out.println("Ataque numero " + (j + 1));
-                            Entidad objetivo = enemigos.get(objetivo_aleatorio);
+                            Entidad objetivo = enemigos.get(objetivo_aleatorio);//Guardamos el objetivo para mayor facilidad
                             int blindajeEfectivo;
-                            if (objetivo.getDefendido()) {
+                            if (objetivo.getDefendido()) {//En caso de que el objetivo este defendido, recibira menos daños aumentando su blindaje 
                                 blindajeEfectivo = objetivo.getArmadura().getBlindaje() * 3;
                             } else {
                                 blindajeEfectivo = objetivo.getArmadura().getBlindaje();
-                                if (!armaAUsar.getEsMelee()) {
+                                if (!armaAUsar.getEsMelee()) {//Comprobamos si el arma a usar el melee ya que si el objetivo golpea a distancia no se podra atacar
                                     if (armaAUsar.getMunicionAct() <= 0) {
                                         System.out.println(
                                                 armaAUsar.getNombre() + " sin municion, recargando y fin de turno!");
                                         armaAUsar.setMunicionAct(armaAUsar.getMunicionMax());
                                         return;
                                     }
-                                    if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
+                                    if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {//Comprobar si el ataque falla
                                         armaAUsar.setMunicionAct(armaAUsar.getMunicionAct() - 1);
-                                        if (ran.nextInt(1, 7) == 1) {
+                                        if (ran.nextInt(1, 7) == 1) {//Comprobar critico
                                             System.out.println("CRITICO");
                                             int daño = armaAUsar.getDaño();
-                                            int daño_final = daño * 2 - blindajeEfectivo;
+                                            int daño_final = daño * 2 - blindajeEfectivo; //El daño real que va a golpear al objetivo
                                             if (daño_final < 0)
                                                 daño_final = 0;
                                             objetivo.setVida(objetivo.getVida() - daño_final);
@@ -243,6 +286,7 @@ public class Entidad {
                                         System.out.println("No golpea al objetivo el ataque ");
                                     }
                                 } else {
+                                    //Funcionamiento igaul pero en caso de que el arma no sea melee
                                     if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
                                         if (ran.nextInt(1, 7) == 1) {
                                             System.out.println("CRITICO");
@@ -269,6 +313,7 @@ public class Entidad {
                     }
                 } else {
                     // Enemigo ataca a aliados
+                    //Mismo funcionamineto pero en este caso el objetivo sera de la lista aliados
                     if (aliados.isEmpty()) {
                         System.out.println("  No hay aliados disponibles.");
                         return;
@@ -307,14 +352,14 @@ public class Entidad {
                                             System.out.println("CRITICO");
                                             int daño = armaAUsar.getDaño();
                                             int daño_final = daño * 2 - blindajeEfectivo;
-                                            if (daño_final < 0)
+                                            if (daño_final < 0)//Comprobacion que si el daño es menor a 0, evitar que cure al objetivo
                                                 daño_final = 0;
                                             objetivo.setVida(objetivo.getVida() - daño_final);
                                         } else {
                                             System.out.println("Golpe normal");
                                             int daño = armaAUsar.getDaño();
                                             int daño_final = daño - blindajeEfectivo;
-                                            if (daño_final < 0)
+                                            if (daño_final < 0)//Comprobacion que si el daño es menor a 0, evitar que cure al objetivo
                                                 daño_final = 0;
                                             objetivo.setVida(objetivo.getVida() - daño_final);
                                         }
@@ -328,14 +373,14 @@ public class Entidad {
                                             System.out.println("CRITICO");
                                             int daño = armaAUsar.getDaño();
                                             int daño_final = daño * 2 - blindajeEfectivo;
-                                            if (daño_final < 0)
+                                            if (daño_final < 0)//Comprobacion que si el daño es menor a 0, evitar que cure al objetivo
                                                 daño_final = 0;
                                             objetivo.setVida(objetivo.getVida() - daño_final);
                                         } else {
                                             System.out.println("Golpe normal");
                                             int daño = armaAUsar.getDaño();
                                             int daño_final = daño - blindajeEfectivo;
-                                            if (daño_final < 0)
+                                            if (daño_final < 0)//Comprobacion que si el daño es menor a 0, evitar que cure al objetivo
                                                 daño_final = 0;
                                             objetivo.setVida(objetivo.getVida() - daño_final);
                                         }
@@ -348,18 +393,18 @@ public class Entidad {
                         }
                     }
                 }
-            } else if (accion == 1) {
+            } else if (accion == 1) {//Activa posicion defensiva  y recibir menos daño
                 System.out.println(this.getNombre() + " decide  colocarse en posicion defensiva");
                 this.setDefendido(true);
-            } else if (accion == 2) {
-                int habilidad_aleatoria = ran.nextInt(0, this.getHabilidades().size());
+            } else if (accion == 2) {//caso de utilizar habilidades
+                int habilidad_aleatoria = ran.nextInt(0, this.getHabilidades().size()); //Seleccion de habilidad aleatoria
                 Habilidades habilidadElegida = this.getHabilidades().get(habilidad_aleatoria);
                 String tipoHab = habilidadElegida.getTipo();
                 System.out.println(this.getNombre() + " decide usar una habilidad: "
                         + habilidadElegida.getNombre());
                 // "ofensiva" y "debuf" van a enemigos; "buf", "curacion", "movimiento" van a aliados
-                boolean dirigidaAEnemigos = tipoHab.equals("ofensiva") || tipoHab.equals("debuf");
-                if (aliados.contains(personaje)) {
+                boolean dirigidaAEnemigos = tipoHab.equals("ofensiva") || tipoHab.equals("debuf"); //Comprobacion de un booleano 
+                if (aliados.contains(personaje)) {//Comprobaciones de objetivo
                     if (dirigidaAEnemigos) {
                         habilidadElegida.EjecutarHabilidad(enemigos);
                     } else {
@@ -372,7 +417,7 @@ public class Entidad {
                         habilidadElegida.EjecutarHabilidad(enemigos);
                     }
                 }
-            } else if (accion == 3) {
+            } else if (accion == 3) {//Accion de recargas las balas del arma
                 Arma armaRecarga = this.getArma();
                 if (armaRecarga.getMunicionMax() > 0) {
                     System.out.println(this.getNombre() + " recarga su arma: " + armaRecarga.getNombre()

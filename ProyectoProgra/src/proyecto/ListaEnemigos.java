@@ -66,6 +66,14 @@ public enum ListaEnemigos {
     private final ListaArmas arma;
     private final ListaArmaduras armadura;
 
+    /**
+     * Constructor interno para definir la plantilla de cada enemigo.
+     * * @param faccion  Nombre de la facción.
+     * @param nombre   Nombre de la unidad.
+     * @param vida     Salud base.
+     * @param arma     Constante de {@link ListaArmas} asociada.
+     * @param armadura Constante de {@link ListaArmaduras} asociada.
+     */
     ListaEnemigos(String faccion, String nombre, int vida, ListaArmas arma, ListaArmaduras armadura) {
         this.faccion = faccion;
         this.nombre = nombre;

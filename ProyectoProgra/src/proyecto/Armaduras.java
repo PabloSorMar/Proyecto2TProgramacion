@@ -10,6 +10,12 @@ public class Armaduras {
     private int velocidad;
 
 
+    /**
+     * onstructor para la clase Armaduras.
+     * @param nombre    El nombre descriptivo de la armadura (ej. "Cota de malla", "Peto de acero").
+     * @param blindaje  El valor numérico que indica la reducción de daño o nivel de defensa.
+     * @param velocidad El modificador que afecta el movimiento del personaje al portar la armadura.
+     */
     Armaduras( String nombre,int blindaje, int velocidad)
     {
         this.nombre = nombre;

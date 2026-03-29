@@ -1,5 +1,6 @@
 package proyecto;
 
+//Catalogo de Armaduras
 public enum ListaArmaduras {
     TOGA("Toga", 10, 150),
     ARMADURA_FLAK("Armadura Flak", 20, 100),
@@ -49,12 +50,23 @@ public enum ListaArmaduras {
     private final int blindaje;
     private final int velocidad;
 
+    /**
+     * Constructor interno del enumerado.
+     * * @param nombre    Nombre visual de la pieza de armadura.
+     * @param blindaje  Puntos de defensa que proporciona.
+     * @param velocidad Valor de agilidad o rapidez asociado.
+     */
     ListaArmaduras(String nombre, int blindaje, int velocidad) {
         this.nombre = nombre;
         this.blindaje = blindaje;
         this.velocidad = velocidad;
     }
 
+    /**
+     * Crea y devuelve una nueva instancia de la clase {@code Armaduras} 
+     * basada en los valores definidos en la constante del enumerado.
+     * * @return Un objeto de tipo {@link Armaduras} listo para ser equipado por una entidad.
+     */
     public Armaduras crearInstancia() {
         return new Armaduras(nombre, blindaje, velocidad);
     }

@@ -16,6 +16,17 @@ public class Arma {
     private int cantidadObjetivos;
     private int numAtaques;
 
+/**
+     * Constructor para crear una nueva instancia de la clase Arma.
+     * @param nombre           El nombre identificativo del arma.
+     * @param daño             La cantidad de puntos de daño que inflige el arma por impacto.
+     * @param precision        El porcentaje o valor de probabilidad de acierto del arma.
+     * @param esMelee          Indica si el arma es de cuerpo a cuerpo o a distancia.
+     * @param municionMax      La capacidad máxima de proyectiles o usos que puede almacenar el arma.
+     * @param cantidadObjetivos El número máximo de enemigos que pueden ser alcanzados en un solo ataque.
+     * @param numAtaques       La cantidad de veces que el arma puede atacar en un mismo turno o acción.
+     */
+
     Arma(String nombre, int daño, int precision, boolean esMelee, int municionMax, int cantidadObjetivos,
             int numAtaques) {
         this.nombre = nombre;
@@ -28,6 +39,7 @@ public class Arma {
         this.numAtaques = numAtaques;
     }
 
+    //SETTER Y GETTERS
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

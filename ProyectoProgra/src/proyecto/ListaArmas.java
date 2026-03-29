@@ -69,6 +69,16 @@ public enum ListaArmas {
     private final int cantidadObjetivos;
     private final int numAtaques;
 
+    /**
+     * Constructor interno para definir las estadísticas de cada arma en el catálogo.
+     * @param nombre            Nombre visual del arma.
+     * @param dañoBase          Daño bruto por impacto.
+     * @param precision         Probabilidad de acierto.
+     * @param esMelee           {@code true} si es cuerpo a cuerpo, {@code false} si es a distancia.
+     * @param municionMax       Límite de munición disponible.
+     * @param cantidadObjetivos Máximo de objetivos simultáneos.
+     * @param numAtaques        Número de impactos por ráfaga o ataque.
+     */
     ListaArmas(String nombre, int dañoBase, int precision, boolean esMelee, int municionMax, int cantidadObjetivos,
             int numAtaques) {
         this.nombre = nombre;
@@ -79,7 +89,12 @@ public enum ListaArmas {
         this.cantidadObjetivos = cantidadObjetivos;
         this.numAtaques = numAtaques;
     }
-
+/**
+     * Crea y devuelve una nueva instancia de la clase {@code Arma} 
+     * utilizando los valores configurados en este elemento del catálogo.
+     *
+     * @return Un objeto de tipo {@link Arma} configurado y listo para su uso en combate.
+     */
     public Arma crearInstancia() {
         return new Arma(nombre, dañoBase, precision, esMelee, municionMax, cantidadObjetivos, numAtaques);
     }
