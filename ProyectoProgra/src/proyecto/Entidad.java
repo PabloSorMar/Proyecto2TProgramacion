@@ -3,7 +3,14 @@ package proyecto;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Representa cualquier personaje (Héroe o Enemigo) en el juego.
+ * Gestiona estadísticas como vida, estados alterados (stun, hemorragia, veneno),
+ * equipamiento (arma, armadura) y el inventario de habilidades.
+ * Contiene la lógica principal de la IA para realizar turnos de combate.
+ */
 public class Entidad {
+
     private String nombre;
     private String faccion;
     private int vida;
@@ -126,7 +133,7 @@ public class Entidad {
             case "Deathwatch":      return "\u001B[96m";  // Cian brillante
             case "Orkos":           return "\u001B[93m";  // Amarillo
             case "Necrones":        return "\u001B[34m";  // Azul
-            case "Tir\u00e1nidos":     return "\u001B[35m";  // Magenta
+            case "Tiránidos":     return "\u001B[35m";  // Magenta
             case "Aeldari":         return "\u001B[94m";  // Azul brillante
             case "T'au":            return "\u001B[33m";  // Naranja/Amarillo
             case "Caos":            return "\u001B[31m";  // Rojo
@@ -346,19 +353,23 @@ public class Entidad {
                 this.setDefendido(true);
             } else if (accion == 2) {
                 int habilidad_aleatoria = ran.nextInt(0, this.getHabilidades().size());
-                System.out.println(this.getNombre() + " decide usar una habilidad "
-                        + this.getHabilidades().get(habilidad_aleatoria).getNombre());
+                Habilidades habilidadElegida = this.getHabilidades().get(habilidad_aleatoria);
+                String tipoHab = habilidadElegida.getTipo();
+                System.out.println(this.getNombre() + " decide usar una habilidad: "
+                        + habilidadElegida.getNombre());
+                // "ofensiva" y "debuf" van a enemigos; "buf", "curacion", "movimiento" van a aliados
+                boolean dirigidaAEnemigos = tipoHab.equals("ofensiva") || tipoHab.equals("debuf");
                 if (aliados.contains(personaje)) {
-                    if (this.getHabilidades().get(habilidad_aleatoria).getTipo() == "ofensiva") {
-                        this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(enemigos);
+                    if (dirigidaAEnemigos) {
+                        habilidadElegida.EjecutarHabilidad(enemigos);
                     } else {
-                        this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(aliados);
+                        habilidadElegida.EjecutarHabilidad(aliados);
                     }
                 } else {
-                    if (this.getHabilidades().get(habilidad_aleatoria).getTipo() == "ofensiva") {
-                        this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(aliados);
+                    if (dirigidaAEnemigos) {
+                        habilidadElegida.EjecutarHabilidad(aliados);
                     } else {
-                        this.getHabilidades().get(habilidad_aleatoria).EjecutarHabilidad(enemigos);
+                        habilidadElegida.EjecutarHabilidad(enemigos);
                     }
                 }
             } else if (accion == 3) {

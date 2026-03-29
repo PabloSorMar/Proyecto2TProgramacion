@@ -1,6 +1,12 @@
 package proyecto;
 
+/**
+ * Representa un arma en el juego.
+ * Gestiona estadísticas de daño, precisión, tipo (melee/rango) y munición.
+ * Define cuántos ataques realiza y a cuántos objetivos puede golpear.
+ */
 public class Arma {
+
     private String nombre;
     private int daño;
     private int precision;

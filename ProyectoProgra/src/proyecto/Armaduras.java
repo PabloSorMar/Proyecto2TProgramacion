@@ -1,5 +1,10 @@
 package proyecto;
+/**
+ * Representa la armadura de una entidad.
+ * Define el nivel de protección (blindaje) y la iniciativa en combate (velocidad).
+ */
 public class Armaduras {
+
     private String nombre;
     private int blindaje;
     private int velocidad;

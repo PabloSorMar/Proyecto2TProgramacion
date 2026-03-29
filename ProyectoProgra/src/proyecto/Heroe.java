@@ -1,7 +1,12 @@
 package proyecto;
 import java.util.List;
 
+/**
+ * Especialización de Entidad para los personajes jugadores.
+ * Soporta un arma secundaria (arma2) adicional.
+ */
 public class Heroe extends Entidad{
+
     private Arma arma2;
 
 

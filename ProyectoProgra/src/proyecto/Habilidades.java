@@ -2,7 +2,13 @@ package proyecto;
 
 import java.util.List;
 
+/**
+ * Clase base para todas las habilidades del juego.
+ * Gestiona el cooldown, la precisión, el tipo de habilidad y su ejecución.
+ * Las habilidades específicas heredan de esta clase o de sus especializaciones mecánicas.
+ */
 public class Habilidades {
+
     private String nombre;
     private int cooldownBase;
     private int cooldownActual;

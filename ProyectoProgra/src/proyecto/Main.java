@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Clase principal que gestiona el ciclo de vida de la campaña Warhammer 40k.
+ * Se encarga de la selección aleatoria de facciones, héroes y misiones.
+ * Implementa el bucle de misiones y el sistema de combate por turnos basado en velocidad.
+ */
 public class Main {
+
 
     public static void main(String[] args) {
         Random ran = new Random();
