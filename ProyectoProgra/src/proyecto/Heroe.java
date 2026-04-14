@@ -33,7 +33,7 @@ this.arma2 = arma2;
 /**
      * Ejecuta la lógica de combate correspondiente al turno del Héroe.
      * * Este método está marcado con {@code @Override} ya que redefine el comportamiento
-     * de la clase base. Actualmente, delega toda la ejecución a {@code super.RealizarTurno},
+     * de la clase base. Actualmente, delega toda la ejecución a {@code super.realizarTurno},
      * lo que implica que el Héroe actuará siguiendo la lógica automatizada (aleatoria) 
      * definida para cualquier entidad general del juego.
      *
@@ -43,9 +43,9 @@ this.arma2 = arma2;
      * (usualmente el propio Héroe).
      */
     @Override
-    public void RealizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje) {
+    public void realizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje) {
         // Por ahora, el Héroe realiza el turno exactamente igual que una Entidad (de forma aleatoria).
-        // Al usar super.RealizarTurno() estamos llamando a la función padre que ya contiene toda la lógica.
-        super.RealizarTurno(aliados, enemigos, personaje);
+        // Al usar super.realizarTurno() estamos llamando a la función padre que ya contiene toda la lógica.
+        super.realizarTurno(aliados, enemigos, personaje);
     }
 }

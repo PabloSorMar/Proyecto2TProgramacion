@@ -81,7 +81,7 @@ public class Habilidades {
         this.cooldownActual = this.cooldownBase;
     }
 
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         usarHabilidad();
     }
 }

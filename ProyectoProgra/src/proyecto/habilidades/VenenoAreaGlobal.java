@@ -17,7 +17,7 @@ public class VenenoAreaGlobal extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             Random ran = new Random();
             System.out.println("La habilidad " + this.getNombre() + " envenena el area!");

@@ -17,7 +17,7 @@ public class EfectoBufBlindaje extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             for (Entidad objetivo : objetivos) {
                 System.out.println("La habilidad " + this.getNombre() + " aumenta el blindaje de " + objetivo.getNombre());

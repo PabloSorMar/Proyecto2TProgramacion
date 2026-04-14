@@ -15,7 +15,7 @@ public class DebufVelocidadGrupo extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             Random ran = new Random();
             for (Entidad objetivo : objetivos) {

@@ -15,7 +15,7 @@ public class DebufPrecisionIndividual extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             Random ran = new Random();
             if (ran.nextInt(0, 100) < this.getPrecision()) {

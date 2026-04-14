@@ -125,7 +125,7 @@ public class Main {
                     Entidad perso = personajes.get(i);
 
                     if (perso.getVida() > 0 && aliados.size() > 0 && enemigos.size() > 0) {
-                        perso.RealizarTurno(aliados, enemigos, perso);
+                        perso.realizarTurno(aliados, enemigos, perso);
 
                         for (int j = aliados.size() - 1; j >= 0; j--) {
                             if (aliados.get(j).getVida() <= 0) {

@@ -15,7 +15,7 @@ public class HemorragiaMultiple extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             Random ran = new Random();
             for (int i = 0; i < 4; i++) {

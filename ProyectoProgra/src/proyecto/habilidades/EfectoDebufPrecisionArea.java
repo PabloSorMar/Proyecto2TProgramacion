@@ -18,7 +18,7 @@ public class EfectoDebufPrecisionArea extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             System.out.println("La habilidad " + this.getNombre() + " reduce la precisión de todos los enemigos.");
             for (Entidad objetivo : objetivos) {

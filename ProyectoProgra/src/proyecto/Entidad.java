@@ -175,7 +175,7 @@ public class Entidad {
      * @param enemigos  Lista de entidades hostiles para el ejecutor.
      * @param personaje Referencia a la entidad que está actuando (usado para determinar bando).
      */
-    public void RealizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje) {
+    public void realizarTurno(List<Entidad> aliados, List<Entidad> enemigos, Entidad personaje) {
         //Poner color segun la faccion del perosnaje 
         String COLOR = getColorFaccion();
         String RESET = "\u001B[0m";
@@ -406,15 +406,15 @@ public class Entidad {
                 boolean dirigidaAEnemigos = tipoHab.equals("ofensiva") || tipoHab.equals("debuf"); //Comprobacion de un booleano 
                 if (aliados.contains(personaje)) {//Comprobaciones de objetivo
                     if (dirigidaAEnemigos) {
-                        habilidadElegida.EjecutarHabilidad(enemigos);
+                        habilidadElegida.ejecutarHabilidad(enemigos);
                     } else {
-                        habilidadElegida.EjecutarHabilidad(aliados);
+                        habilidadElegida.ejecutarHabilidad(aliados);
                     }
                 } else {
                     if (dirigidaAEnemigos) {
-                        habilidadElegida.EjecutarHabilidad(aliados);
+                        habilidadElegida.ejecutarHabilidad(aliados);
                     } else {
-                        habilidadElegida.EjecutarHabilidad(enemigos);
+                        habilidadElegida.ejecutarHabilidad(enemigos);
                     }
                 }
             } else if (accion == 3) {//Accion de recargas las balas del arma

@@ -18,7 +18,7 @@ public class RecargarArma extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             Random ran = new Random();
             Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));

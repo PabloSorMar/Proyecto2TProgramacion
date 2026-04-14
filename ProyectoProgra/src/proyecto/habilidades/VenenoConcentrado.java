@@ -14,7 +14,7 @@ public class VenenoConcentrado  extends Habilidades{
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos)
+    public void ejecutarHabilidad(List<Entidad> objetivos)
     {
         if (super.estaDisponible()) 
         {

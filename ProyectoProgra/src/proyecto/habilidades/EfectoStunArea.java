@@ -17,7 +17,7 @@ public class EfectoStunArea extends Habilidades {
     }
 
     @Override
-    public void EjecutarHabilidad(List<Entidad> objetivos) {
+    public void ejecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             System.out.println("La habilidad " + this.getNombre() + " aturde a todo el escuadrón enemigo.");
             for (Entidad objetivo : objetivos) {
