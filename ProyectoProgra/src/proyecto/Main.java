@@ -7,10 +7,10 @@ import java.util.Random;
 /**
  * Clase principal que gestiona el ciclo de vida de la campaña Warhammer 40k.
  * Se encarga de la selección aleatoria de facciones, héroes y misiones.
- * Implementa el bucle de misiones y el sistema de combate por turnos basado en velocidad.
+ * Implementa el bucle de misiones y el sistema de combate por turnos basado en
+ * velocidad.
  */
 public class Main {
-
 
     public static void main(String[] args) {
         Random ran = new Random();
@@ -34,12 +34,7 @@ public class Main {
         System.out.println("=== FACCION DE JUGADORES: " + nombreFaccion.toUpperCase() + " ===");
 
         // Obtener heroes de esa faccion en lista mutable para poder quitarlos al elegir
-        List<ListaHeroes> heroesDeFaccion = new ArrayList<>();
-        for (ListaHeroes h : ListaHeroes.values()) {
-            if (h.getFaccion().equals(nombreFaccion)) {
-                heroesDeFaccion.add(h);
-            }
-        }
+        List<ListaHeroes> heroesDeFaccion = ListaHeroes.obtenerPorFaccion(nombreFaccion);
 
         // =============================================
         // 2. SELECCION ALEATORIA DE HEROES (sin repeticion, se guarda para restaurar)
@@ -77,12 +72,7 @@ public class Main {
             String faccionEnemiga = facciones[ran.nextInt(facciones.length)];
             System.out.println("Faccion enemiga: " + faccionEnemiga.toUpperCase());
 
-            List<ListaEnemigos> enemigosDeFaccion = new ArrayList<>();
-            for (ListaEnemigos e : ListaEnemigos.values()) {
-                if (e.getFaccion().equals(faccionEnemiga)) {
-                    enemigosDeFaccion.add(e);
-                }
-            }
+            List<ListaEnemigos> enemigosDeFaccion = ListaEnemigos.obtenerPorFaccion(faccionEnemiga);
 
             // =============================================
             // 4. NUMERO ALEATORIO DE ENEMIGOS (1-8)
@@ -104,22 +94,8 @@ public class Main {
             while (aliados.size() > 0 && enemigos.size() > 0) {
                 // Reconstruir personajes ordenado por velocidad (mayor = primero)
                 personajes.clear();
-                for (Entidad e : aliados) {
-                    int pos = 0;
-                    while (pos < personajes.size()
-                            && personajes.get(pos).getArmadura().getVelocidad() >= e.getArmadura().getVelocidad()) {
-                        pos++;
-                    }
-                    personajes.add(pos, e);
-                }
-                for (Entidad e : enemigos) {
-                    int pos = 0;
-                    while (pos < personajes.size()
-                            && personajes.get(pos).getArmadura().getVelocidad() >= e.getArmadura().getVelocidad()) {
-                        pos++;
-                    }
-                    personajes.add(pos, e);
-                }
+                agregarOrdenadoPorVelocidad(personajes, aliados);
+                agregarOrdenadoPorVelocidad(personajes, enemigos);
 
                 for (int i = 0; i < personajes.size(); i++) {
                     Entidad perso = personajes.get(i);
@@ -127,26 +103,12 @@ public class Main {
                     if (perso.getVida() > 0 && aliados.size() > 0 && enemigos.size() > 0) {
                         perso.RealizarTurno(aliados, enemigos, perso);
 
-                        for (int j = aliados.size() - 1; j >= 0; j--) {
-                            if (aliados.get(j).getVida() <= 0) {
-                                System.out.println("  [MUERTO] " + aliados.get(j).getNombre());
-                                aliados.remove(j);
-                            }
-                        }
-                        for (int j = enemigos.size() - 1; j >= 0; j--) {
-                            if (enemigos.get(j).getVida() <= 0) {
-                                System.out.println("  [MUERTO] " + enemigos.get(j).getNombre());
-                                enemigos.remove(j);
-                            }
-                        }
+                        eliminarMuertos(aliados, true);
+                        eliminarMuertos(enemigos, true);
                     }
                 }
 
-                for (int j = personajes.size() - 1; j >= 0; j--) {
-                    if (personajes.get(j).getVida() <= 0) {
-                        personajes.remove(j);
-                    }
-                }
+                eliminarMuertos(personajes, false);
             }
 
             // =============================================
@@ -170,6 +132,31 @@ public class Main {
                 System.out.println("  COMENZANDO EXTERMINATUS");
                 System.out.println("================================================");
                 break; // Fin del juego
+            }
+        }
+    }
+
+    // Agrega entidades a la lista de personajes ordenándolas de mayor a menor
+    // velocidad.
+    private static void agregarOrdenadoPorVelocidad(List<Entidad> personajes, List<Entidad> grupo) {
+        for (Entidad e : grupo) {
+            int pos = 0;
+            while (pos < personajes.size()
+                    && personajes.get(pos).getArmadura().getVelocidad() >= e.getArmadura().getVelocidad()) {
+                pos++;
+            }
+            personajes.add(pos, e);
+        }
+    }
+
+    // Elimina de la lista a las entidades cuya vida sea 0 o inferior.
+    private static void eliminarMuertos(List<Entidad> grupo, boolean mostrarMensaje) {
+        for (int j = grupo.size() - 1; j >= 0; j--) {
+            if (grupo.get(j).getVida() <= 0) {
+                if (mostrarMensaje) {
+                    System.out.println("  [MUERTO] " + grupo.get(j).getNombre());
+                }
+                grupo.remove(j);
             }
         }
     }

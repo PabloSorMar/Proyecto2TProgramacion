@@ -38,11 +38,13 @@ public enum ListaEnemigos {
 
     // AELDARI
     GUARDIAN("Aeldari", "Guardián", 120, ListaArmas.CATAPULTA_SHURIKEN, ListaArmaduras.MALLA_RUNICA),
-    VENGADOR_TENEBROSO("Aeldari", "Vengador Tenebroso", 180, ListaArmas.CATAPULTA_VENGADORA, ListaArmaduras.MALLA_RUNICA),
+    VENGADOR_TENEBROSO("Aeldari", "Vengador Tenebroso", 180, ListaArmas.CATAPULTA_VENGADORA,
+            ListaArmaduras.MALLA_RUNICA),
     ESPECTRO_AULLANTE("Aeldari", "Espectro Aullante", 150, ListaArmas.ESPADA_ENERGIA, ListaArmaduras.ARMADURA_ESPECTRO),
     ESCORPION_ASESINO("Aeldari", "Escorpión Asesino", 175, ListaArmas.SIERRA_ESCORPION, ListaArmaduras.A_PESADA_ELDAR),
     VIDENTE("Aeldari", "Vidente", 200, ListaArmas.LANZA_CANTANTE, ListaArmaduras.TUNICA_RUNICA),
-    GUARDIA_ESPECTRAL("Aeldari", "Guardia Espectral", 400, ListaArmas.CANON_DISTORSION, ListaArmaduras.ARMADURA_ESPECTRO),
+    GUARDIA_ESPECTRAL("Aeldari", "Guardia Espectral", 400, ListaArmas.CANON_DISTORSION,
+            ListaArmaduras.ARMADURA_ESPECTRO),
 
     // T'AU
     CASTA_DEL_FUEGO("T'au", "Casta del Fuego", 125, ListaArmas.RIFLE_DE_PULSO, ListaArmaduras.ARMADURA_TAU),
@@ -68,7 +70,8 @@ public enum ListaEnemigos {
 
     /**
      * Constructor interno para definir la plantilla de cada enemigo.
-     * * @param faccion  Nombre de la facción.
+     * * @param faccion Nombre de la facción.
+     * 
      * @param nombre   Nombre de la unidad.
      * @param vida     Salud base.
      * @param arma     Constante de {@link ListaArmas} asociada.
@@ -86,225 +89,240 @@ public enum ListaEnemigos {
         List<Habilidades> habs = new ArrayList<>();
         switch (this) {
             case GRETCHIN:
-                habs.add(new Cobardia());
-                habs.add(new Robar());
-                habs.add(new Esconderse());
-                habs.add(new Pedrada());
+                habs.add(new EfectoBufVelocidad("Cobardía", 0, "Si recibe daño, retrocede automáticamente una posición.", false, "movimiento", 30));
+                habs.add(new DebufVelocidadIndividual("Robar", 3, "Roba suministros, ralentizando al enemigo.", false, "debuf"));
+                habs.add(new EfectoEscudoInvulnerable("Esconderse", 4, "No puede ser objetivo de ataques a distancia (1 turno).", false, "buf"));
+                habs.add(new EfectoAturdimiento("Pedrada", 2, "Lanza una piedra con fuerza para aturdir.", true, "ofensiva", 10, 1));
                 break;
             case GUERRERO_ORKO:
-                habs.add(new Waaagh());
-                habs.add(new Cabezazo());
-                habs.add(new DisparoLoco());
-                habs.add(new Carga());
+                habs.add(new EfectoBufVelocidad("¡Waaagh!", 5, "Aumenta la Velocidad de los aliados en +30 por 1 turno.", false, "buf", 30));
+                habs.add(new EfectoAturdimiento("Cabezazo", 3, "Propinas un cabezazo brutal (1T stun).", false, "ofensiva", 20, 1));
+                habs.add(new EfectoDanoArea("Disparo Loco", 3, "Dispara en todas direcciones sin apuntar.", true, "ofensiva", 25));
+                habs.add(new EfectoDanoDirecto("Carga", 3, "Carga contra el enemigo infligiendo daño.", false, "ofensiva", 40));
                 break;
             case ZANGUINARIO:
-                habs.add(new Salto());
-                habs.add(new Impacto());
-                habs.add(new Descenso());
-                habs.add(new FuriaAerea());
+                habs.add(new EfectoBufVelocidad("Salto", 3, "Salta sobre un enemigo ignorando cobertura.", false, "movimiento", 30));
+                habs.add(new EfectoDanoArea("Impacto", 3, "Al caer tras un salto, inflige 20 Daño a objetivos adyacentes.", false, "ofensiva", 20));
+                habs.add(new EfectoBufVelocidad("Descenso", 3, "Permite moverse 3 casillas adicionales tras un salto.", false, "movimiento", 30));
+                habs.add(new EfectoDanoDirecto("Furia Aérea", 3, "Ataque descendente con gran potencia.", false, "ofensiva", 45));
                 break;
             case ORKO_NOBLE:
-                habs.add(new Rugido());
-                habs.add(new Intimidar());
-                habs.add(new Aplastar());
-                habs.add(new Ordenar());
+                habs.add(new EfectoBufVelocidad("Rugido", 5, "Unifica a los aliados, aumentando su Precisión en +10.", false, "buf", 30));
+                habs.add(new EfectoDebufPrecisionArea("Intimidar", 3, "Reduce la Precisión de los enemigos en un -20% durante 1 turno.", true, "debuf", 20));
+                habs.add(new EfectoDanoPerforante("Aplastar", 5, "Aplastamiento masivo que ignora la armadura del objetivo.", false, "ofensiva", 70));
+                habs.add(new EfectoBufPrecision("Ordenar", 2, "Indica a un aliado que ataque inmediatamente.", false, "buf", 20));
                 break;
             case MEKA_ORKO:
-                habs.add(new Reparacion());
-                habs.add(new CampoFuerza());
-                habs.add(new Torreta());
-                habs.add(new Chispazo());
+                habs.add(new EfectoCuracionSostenida("Reparación", 4, "Efectos de reparación continua en el objetivo (3T).", true, "curacion", 3));
+                habs.add(new EfectoEscudoInvulnerable("Campo de Fuerza", 5, "Protege a los aliados en un radio de 2 casillas con un escudo.", false, "buf"));
+                habs.add(new EfectoDanoArea("Despliegue de Torreta", 5, "Despliega una torreta defensiva que barre el área.", true, "ofensiva", 35));
+                habs.add(new EfectoAturdimiento("Chispazo", 3, "Descarga eléctrica que paraliza (1T).", true, "ofensiva", 15, 1));
                 break;
             case ACHICHARRADOR:
-                habs.add(new Incendio());
-                habs.add(new MuroFuego());
-                habs.add(new Gas());
-                habs.add(new Combustible());
+                habs.add(new VenenoAreaGlobal("Incendio", 4, "Prende fuego a un área de 3 casillas (15 Daño por turno).", true, "ofensiva"));
+                habs.add(new VenenoAreaGlobal("Muro de Fuego", 4, "Crea una barrera de llamas que bloquea el paso.", false, "ofensiva"));
+                habs.add(new EfectoVenenoMultiple("Nube de Gas", 4, "Lanza una nube de gas tóxico a varios objetivos.", true, "ofensiva", 3, 2));
+                habs.add(new EfectoBufPrecision("Combustible", 2, "Recarga el lanzallamas aumentando el daño del siguiente ataque.", false, "buf", 20));
                 break;
             case ENJAMBRE_CANOPTICO:
-                habs.add(new Enjambrar());
-                habs.add(new RepararNecron());
-                habs.add(new Autorreparacion());
-                habs.add(new EsquivaNecron());
+                habs.add(new DebufVelocidadGrupo("Enjambrar", 4, "Rodea a los enemigos ralentizando a todo el grupo.", true, "debuf"));
+                habs.add(new EfectoCuracionIndividual("Protocolos de Reparación", 4, "Activa nanomáquinas para reparar el chasis.", true, "curacion", 40));
+                habs.add(new CuracionSostenidaMultiple("Autorreparación", 4, "Activa protocolos de autorreparación sostenida.", true, "buf"));
+                habs.add(new EfectoBufVelocidad("Esquiva Necrona", 3, "Aumenta la esquiva de la unidad en un +20%.", false, "buf", 30));
                 break;
             case GUERRERO_NECRON:
-                habs.add(new Protocolo());
-                habs.add(new Enfoque());
-                habs.add(new DisparoGauss());
-                habs.add(new Aguante());
+                habs.add(new EfectoEscudoInvulnerable("Protocolo", 4, "Aumenta la defensa por armadura de la unidad.", false, "buf"));
+                habs.add(new EfectoBufPrecision("Enfoque", 2, "Aumenta la precisión para el siguiente disparo.", true, "buf", 20));
+                habs.add(new EfectoDanoPerforante("Disparo Gauss", 4, "Proyectil de alta velocidad que atraviesa blindajes.", true, "ofensiva", 55));
+                habs.add(new EfectoEscudoInvulnerable("Aguante", 4, "Aumenta la resistencia del Necrón.", false, "buf"));
                 break;
             case INMORTAL:
-                habs.add(new Sobrecarga());
-                habs.add(new Escudo());
-                habs.add(new Tesla());
-                habs.add(new Inamovible());
+                habs.add(new EfectoBufPrecision("Sobrecarga", 3, "Aumenta el daño del arma a cambio de reducir la Precisión.", true, "buf", 20));
+                habs.add(new EfectoEscudoInvulnerable("Escudo", 4, "Activa un escudo de energía.", false, "buf"));
+                habs.add(new EfectoDanoMultiple("Sonda Tesla", 4, "Lanza descargas eléctricas a objetivos aleatorios.", true, "ofensiva", 3, 25));
+                habs.add(new EfectoEscudoInvulnerable("Inamovible", 5, "La unidad no puede ser desplazada ni aturdida (2 turnos).", false, "buf"));
                 break;
             case OMNICIDA:
-                habs.add(new Teletransporte());
-                habs.add(new Marca());
-                habs.add(new Francotirador());
-                habs.add(new Invisibilidad());
+                habs.add(new EfectoBufVelocidad("Teletransporte", 5, "Se desplaza instantáneamente a otra posición.", false, "movimiento", 30));
+                habs.add(new EfectoBufPrecision("Marca", 3, "Marca al objetivo para facilitar el impacto.", true, "buf", 25));
+                habs.add(new EfectoBufPrecision("Francotirador", 3, "Realiza un disparo extremadamente preciso.", true, "ofensiva", 20));
+                habs.add(new EfectoEscudoInvulnerable("Invisibilidad", 5, "Se vuelve prácticamente imposible de impactar (1 turno).", false, "buf"));
                 break;
             case DESTRUCTOR:
-                habs.add(new OdioEterno());
-                habs.add(new Vuelo());
-                habs.add(new Optimizar());
-                habs.add(new Rafaga());
+                habs.add(new GolpeEjecutor("Odio Eterno", 4, "Aumenta drásticamente el daño contra un enemigo específico.", false, "ofensiva"));
+                habs.add(new EfectoBufVelocidad("Vuelo", 3, "Permite ignorar el terreno y moverse con mayor libertad.", false, "buf", 30));
+                habs.add(new RecargarArma("Optimizar", 4, "Reduce los tiempos de reutilización de las habilidades.", false, "buf"));
+                habs.add(new EfectoDanoMultiple("Ráfaga", 3, "Dispara una ráfaga de proyectiles sobre el enemigo.", true, "ofensiva", 3, 20));
                 break;
             case LIDER_NECRON:
-                habs.add(new Comando());
-                habs.add(new RayoSolar());
-                habs.add(new Invulnerable());
-                habs.add(new Escudo());
+                habs.add(new EfectoBufPrecision("Comando", 5, "Ordena a los aliados cercanos atacar a un objetivo marcado.", false, "buf", 20));
+                habs.add(new EfectoDanoArea("Rayo Solar", 4, "Un haz de luz cegadora que daña a los enemigos.", true, "ofensiva", 50));
+                habs.add(new EfectoEscudoInvulnerable("Invulnerable", 5, "La unidad se vuelve invulnerable por un breve periodo.", false, "buf"));
+                habs.add(new EfectoEscudoInvulnerable("Escudo", 4, "Activa un escudo de energía.", false, "buf"));
                 break;
             case TERMAGANTE:
-                habs.add(new Instinto());
-                habs.add(new Sigilo());
-                habs.add(new Salto());
-                habs.add(new Mordisco());
+                habs.add(new EfectoBufPrecision("Instinto", 0, "Ataque instintivo rápido.", false, "buf", 20));
+                habs.add(new EfectoBufVelocidad("Sigilo", 3, "La unidad se mueve sin ser detectada.", false, "buf", 30));
+                habs.add(new EfectoBufVelocidad("Salto", 3, "Salta sobre un enemigo ignorando cobertura.", false, "movimiento", 30));
+                habs.add(new EfectoVenenoMultiple("Mordisco Venenoso", 2, "Muerde al enemigo inyectando veneno.", false, "ofensiva", 1, 3));
                 break;
             case HORMAGANTE:
-                habs.add(new Carrera());
-                habs.add(new SaltoLargo());
-                habs.add(new Enjambre());
-                habs.add(new Frenesi());
+                habs.add(new EfectoBufVelocidad("Carrera", 3, "Aumenta la velocidad del aliado (30).", true, "buf", 30));
+                habs.add(new EfectoBufVelocidad("Salto Largo", 4, "Un salto de gran distancia.", false, "movimiento", 30));
+                habs.add(new EfectoBufPrecision("Enjambre", 3, "Aumenta la Precisión si hay aliados cerca.", false, "buf", 20));
+                habs.add(new EfectoBufVelocidad("Frenesí", 4, "Ataques más rápidos y furiosos.", false, "buf", 30));
                 break;
             case GENESTEALER:
-                habs.add(new Infiltrar());
-                habs.add(new ReflejosRelampago());
-                habs.add(new Despedazar());
-                habs.add(new Miedo());
+                habs.add(new EfectoBufVelocidad("Infiltrar", 4, "Aparece detrás de las líneas enemigas.", false, "movimiento", 30));
+                habs.add(new EfectoBufVelocidad("Reflejos Relámpago", 3, "Mejora los reflejos aumentando la velocidad (40).", true, "buf", 40));
+                habs.add(new EfectoHemorragia("Despedazar", 5, "Un ataque feroz que desgarra al objetivo (4T hemorragia).", false, "ofensiva", 4));
+                habs.add(new EfectoDebufPrecisionArea("Miedo", 3, "Causa miedo en los enemigos.", true, "debuf", 10));
                 break;
             case GUERRERO_TIRANIDO:
-                habs.add(new Nexo());
-                habs.add(new Rugido());
-                habs.add(new Regenerar());
-                habs.add(new Carga());
+                habs.add(new EfectoBufPrecision("Nexo", 3, "Conexión psíquica que mejora el rendimiento del equipo.", false, "buf", 20));
+                habs.add(new EfectoBufVelocidad("Rugido", 5, "Unifica a los aliados, aumentando su Precisión en +10.", false, "buf", 30));
+                habs.add(new EfectoCuracionSostenida("Regenerar", 4, "Aplica regeneración constante de tejidos.", true, "curacion", 4));
+                habs.add(new EfectoDanoDirecto("Carga", 3, "Carga contra el enemigo infligiendo daño.", false, "ofensiva", 40));
                 break;
             case LICTOR:
-                habs.add(new Camaleon());
-                habs.add(new Emboscada());
-                habs.add(new Terror());
-                habs.add(new Empalar());
+                habs.add(new EfectoBufVelocidad("Camaleón", 3, "Se camufla con el entorno.", false, "buf", 30));
+                habs.add(new EfectoBufPrecision("Emboscada", 4, "Ataque por sorpresa con alta probabilidad de Crítico.", false, "ofensiva", 20));
+                habs.add(new EfectoDebufPrecisionArea("Terror", 5, "Provoca terror en el enemigo, bajando su precisión.", true, "debuf", 20));
+                habs.add(new EfectoDanoDirecto("Empalar", 4, "Ataque que atraviesa al enemigo.", false, "ofensiva", 40));
                 break;
             case ZOANTROPO:
-                habs.add(new BarreraPsiquica());
-                habs.add(new MenteColmena());
-                habs.add(new RayoMental());
-                habs.add(new Levitacion());
+                habs.add(new EfectoEscudoInvulnerable("Barrera Psíquica", 5, "Genera un escudo de energía disforme.", true, "defensiva"));
+                habs.add(new EfectoBufPrecision("Mente Colmena", 5, "Coordina a todos los Tiránidos cercanos.", false, "buf", 20));
+                habs.add(new EfectoDanoPerforante("Rayo Mental", 3, "Ataque psíquico directo a la mente (ignora armadura).", true, "ofensiva", 45));
+                habs.add(new EfectoBufVelocidad("Levitación", 3, "Se eleva sobre el suelo para ganar velocidad.", false, "buf", 30));
                 break;
             case GUARDIAN:
-                habs.add(new Disciplina());
-                habs.add(new Granada());
-                habs.add(new Cobertura());
-                habs.add(new Reubicarse());
+                habs.add(new EfectoBufPrecision("Disciplina", 2, "Aumenta la Precisión a través del entrenamiento.", false, "buf", 20));
+                habs.add(new EfectoDanoArea("Granada", 3, "Lanzamiento de una granada explosiva.", true, "ofensiva", 25));
+                habs.add(new EfectoEscudoInvulnerable("Cobertura", 2, "Reduce la probabilidad de impacto del enemigo en un -15% durante 2 turnos.", false, "buf"));
+                habs.add(new EfectoBufVelocidad("Reubicarse", 4, "Aumenta la movilidad del escuadrón.", true, "buf", 35));
                 break;
             case VENGADOR_TENEBROSO:
-                habs.add(new Tormenta());
-                habs.add(new Defensa());
-                habs.add(new Punteria());
-                habs.add(new Retirada());
+                habs.add(new EfectoDanoMultiple("Tormenta de Disparos", 4, "Desata una tormenta de fuego sobre las líneas enemigas.", true, "ofensiva", 3, 25));
+                habs.add(new EfectoEscudoInvulnerable("Defensa", 3, "Postura defensiva Aeldari.", false, "buf"));
+                habs.add(new EfectoBufPrecision("Puntería", 2, "Aumento de Precisión temporal.", true, "buf", 20));
+                habs.add(new EfectoBufVelocidad("Retirada", 3, "Movimiento táctico hacia atrás.", false, "movimiento", 30));
                 break;
             case ESPECTRO_AULLANTE:
-                habs.add(new Grito());
-                habs.add(new Acrobacia());
-                habs.add(new CargaVeloz());
-                habs.add(new Danza());
+                habs.add(new EfectoDebufPrecisionArea("Grito", 3, "Grito ensordecedor que reduce la puntería.", true, "debuf", 15));
+                habs.add(new EfectoBufVelocidad("Acrobacia", 2, "Movimientos ágiles para evitar el daño.", false, "buf", 30));
+                habs.add(new EfectoDanoDirecto("Carga Veloz", 2, "Carga rápida hacia el enemigo (35 daño).", false, "ofensiva", 35));
+                habs.add(new EfectoBufVelocidad("Danza", 4, "Danza de combate que aumenta la Velocidad y Esquiva.", false, "buf", 30));
                 break;
             case ESCORPION_ASESINO:
-                habs.add(new Sigilo());
-                habs.add(new Mordisco());
-                habs.add(new Infiltrar());
-                habs.add(new Emboscada());
+                habs.add(new EfectoBufVelocidad("Sigilo", 3, "La unidad se mueve sin ser detectada.", false, "buf", 30));
+                habs.add(new EfectoVenenoMultiple("Mordisco Venenoso", 2, "Muerde al enemigo inyectando veneno.", false, "ofensiva", 1, 3));
+                habs.add(new EfectoBufVelocidad("Infiltrar", 4, "Aparece detrás de las líneas enemigas.", false, "movimiento", 30));
+                habs.add(new EfectoBufPrecision("Emboscada", 4, "Ataque por sorpresa con alta probabilidad de Crítico.", false, "ofensiva", 20));
                 break;
             case VIDENTE:
-                habs.add(new Guia());
-                habs.add(new Destino());
-                habs.add(new RayoMental());
-                habs.add(new Nexo());
+                habs.add(new EfectoBufPrecision("Guía", 4, "Guía los ataques de un aliado psíquicamente.", false, "buf", 20));
+                habs.add(new EfectoBufPrecision("Destino", 4, "Aclara la visión para ataques perfectos.", true, "buf", 30));
+                habs.add(new EfectoDanoPerforante("Rayo Mental", 3, "Ataque psíquico directo a la mente (ignora armadura).", true, "ofensiva", 45));
+                habs.add(new EfectoBufPrecision("Nexo", 3, "Conexión psíquica que mejora el rendimiento del equipo.", false, "buf", 20));
                 break;
             case GUARDIA_ESPECTRAL:
-                habs.add(new Vacio());
-                habs.add(new Imperturbable());
-                habs.add(new EscudoRunico());
-                habs.add(new GolpePesado());
+                habs.add(new EfectoEscudoInvulnerable("Vacío", 5, "La unidad se vuelve intangible temporalmente.", false, "buf"));
+                habs.add(new EfectoEscudoInvulnerable("Imperturbable", 5, "Resistencia extrema al daño.", false, "buf"));
+                habs.add(new EfectoEscudoInvulnerable("Escudo Rúnico", 5, "Protección basada en runas Aeldari.", false, "buf"));
+                habs.add(new EfectoDanoPerforante("Golpe Pesado", 4, "Un golpe con gran fuerza que ignora el blindaje.", false, "ofensiva", 50));
                 break;
             case CASTA_DEL_FUEGO:
-                habs.add(new BienSuperior());
-                habs.add(new Marcador());
-                habs.add(new Fotonica());
-                habs.add(new Reagrupar());
+                habs.add(new EfectoBufPrecision("Bien Superior", 4, "Aumenta la eficacia de los aliados cercanos.", false, "buf", 20));
+                habs.add(new EfectoBufPrecision("Marcador", 2, "Marca al objetivo para el fuego de apoyo.", true, "debuf", 20));
+                habs.add(new EfectoDebufPrecisionArea("Granada Fotónica", 4, "Ciega a los enemigos con un destello.", true, "debuf", 30));
+                habs.add(new CuracionSostenidaMultiple("Reagrupar", 5, "Ordena un reagrupamiento curando al equipo con el tiempo.", true, "buf"));
                 break;
             case RASTREADOR:
-                habs.add(new Designar());
-                habs.add(new Recon());
-                habs.add(new Precision());
-                habs.add(new Dron());
+                habs.add(new EfectoBufPrecision("Designar", 2, "Designa un objetivo para ataques de Precisión.", true, "debuf", 20));
+                habs.add(new EfectoBufPrecision("Recon", 3, "Exploración del terreno.", false, "buf", 20));
+                habs.add(new EfectoBufPrecision("Precisión", 0, "Aumenta la Precisión del disparo.", true, "buf", 20));
+                habs.add(new EfectoEscudoInvulnerable("Dron", 4, "Despliega un dron de defensa.", false, "buf"));
                 break;
             case XV25_SIGILO:
-                habs.add(new Camuflaje());
-                habs.add(new Despliegue());
-                habs.add(new Sensores());
-                habs.add(new Hostigar());
+                habs.add(new EfectoBufVelocidad("Camuflaje", 3, "Usa la armadura para mimetizarse.", false, "buf", 30));
+                habs.add(new EfectoBufVelocidad("Despliegue", 4, "Posicionamiento rápido tras infiltration.", false, "movimiento", 30));
+                habs.add(new EfectoBufPrecision("Sensores", 3, "Aumenta la Precisión detectando enemigos ocultos.", false, "buf", 20));
+                habs.add(new EfectoDanoMultiple("Hostigar", 2, "Realiza breves ataques de hostigamiento a varios enemigos.", true, "ofensiva", 3, 15));
                 break;
             case XV8_CRISIS:
-                habs.add(new Retrocohetes());
-                habs.add(new Multiblanco());
-                habs.add(new Municion());
-                habs.add(new Escudo());
+                habs.add(new EfectoBufVelocidad("Retrocohetes", 3, "Permite saltar y alejarse tras realizar un ataque.", false, "movimiento", 30));
+                habs.add(new EfectoBufPrecision("Multiblanco", 3, "Permite atacar a varios objetivos simultáneamente.", false, "buf", 20));
+                habs.add(new RecargarArma("Munición", 3, "Suministro extra de munición.", false, "buf"));
+                habs.add(new EfectoEscudoInvulnerable("Escudo", 4, "Activa un escudo de energía.", false, "buf"));
                 break;
             case XV88_APOCALIPSIS:
-                habs.add(new Anclaje());
-                habs.add(new LargaDistancia());
-                habs.add(new BlindajePlus());
-                habs.add(new Misiles());
+                habs.add(new EfectoBufPrecision("Anclaje", 4, "Ancla la unidad al suelo para aumentar drásticamente la Precisión.", false, "buf", 20));
+                habs.add(new EfectoBufPrecision("Larga Distancia", 3, "Aumenta el alcance efectivo del arma.", false, "buf", 20));
+                habs.add(new EfectoBufBlindaje("Blindaje Plus", 4, "Refuerza la armadura del aliado.", true, "buf", 5));
+                habs.add(new EfectoDanoArea("Misiles", 4, "Lanzamiento de una salva de misiles.", true, "ofensiva", 45));
                 break;
             case ETEREO:
-                habs.add(new Invocacion());
-                habs.add(new Liderazgo());
-                habs.add(new Sacrificio());
-                habs.add(new Castigo());
+                habs.add(new EfectoDanoArea("Invocación", 5, "Invoca el apoyo de la casta para realizar un ataque de área.", true, "ofensiva", 40));
+                habs.add(new EfectoBufPrecision("Liderazgo", 4, "Aumenta la moral y efectividad de las unidades cercanas.", false, "buf", 20));
+                habs.add(new EfectoCuracionIndividual("Sacrificio", 3, "Sacrifica energía para sanar a un aliado.", true, "curacion", 35));
+                habs.add(new EfectoDanoArea("Castigo", 5, "Castigo divino/psíquico que golpea a todos los infieles.", true, "ofensiva", 45));
                 break;
             case CULTISTA:
-                habs.add(new Sacrificio());
-                habs.add(new Fanatismo());
-                habs.add(new Punalada());
-                habs.add(new Ocultarse());
+                habs.add(new EfectoCuracionIndividual("Sacrificio", 3, "Sacrifica energía para sanar a un aliado.", true, "curacion", 35));
+                habs.add(new EfectoBufPrecision("Fanatismo", 3, "Aumenta el daño de los ataques temporalmente.", false, "buf", 20));
+                habs.add(new EfectoHemorragia("Puñalada", 2, "Ataque rápido que provoca hemorragia leve (1T).", false, "ofensiva", 1));
+                habs.add(new EfectoBufVelocidad("Ocultarse", 4, "Se esconde entre las sombras.", false, "buf", 30));
                 break;
             case MARINE_TRAIDOR:
-                habs.add(new Granada());
-                habs.add(new Furia());
-                habs.add(new RecargaRapida());
-                habs.add(new Bayoneta());
+                habs.add(new EfectoDanoArea("Granada", 3, "Lanzamiento de una granada explosiva.", true, "ofensiva", 25));
+                habs.add(new EfectoBufVelocidad("Furia", 3, "Estado de rabia ciega.", false, "buf", 30));
+                habs.add(new RecargarArma("Recarga Rápida", 3, "Habilidad para recargar velozmente.", false, "buf"));
+                habs.add(new EfectoDanoDirecto("Carga de Bayoneta", 0, "Ataque cuerpo a cuerpo con bayoneta.", false, "ofensiva", 25));
                 break;
             case BERSERKER_CAOS:
-                habs.add(new SangreDios());
-                habs.add(new Carga());
-                habs.add(new Despedazar());
-                habs.add(new Aullido());
+                habs.add(new EfectoCuracionIndividual("Sangre del Dios-Máquina", 5, "Sana milagrosamente las heridas más graves.", true, "curacion", 50));
+                habs.add(new EfectoDanoDirecto("Carga", 3, "Carga contra el enemigo infligiendo daño.", false, "ofensiva", 40));
+                habs.add(new EfectoHemorragia("Despedazar", 5, "Un ataque feroz que desgarra al objetivo (4T hemorragia).", false, "ofensiva", 4));
+                habs.add(new EfectoDebufPrecisionArea("Aullido", 3, "Grito aterrador que desmoraliza al enemigo.", true, "debuf", 15));
                 break;
             case MARINE_PLAGA:
-                habs.add(new NubeDeMoscas());
-                habs.add(new Regeneracion());
-                habs.add(new VomitoCorrosivo());
-                habs.add(new Tenacidad());
+                habs.add(new EfectoDebufPrecisionArea("Nube de Moscas", 4, "Rodea al enemigo con una nube que dificulta apuntar.", true, "debuf", 20));
+                habs.add(new EfectoCuracionSostenida("Regeneración", 4, "El organismo se regenera con el tiempo (4T).", true, "curacion", 4));
+                habs.add(new VenenoAreaGlobal("Vómito Corrosivo", 4, "Lanza jugos gásticos que disuelven armaduras y carne.", true, "ofensiva"));
+                habs.add(new EfectoEscudoInvulnerable("Tenacidad", 5, "Resistencia inhumana al dolor.", false, "buf"));
                 break;
             case HECHICERO:
-                habs.add(new RayoDeCambio());
-                habs.add(new EscudoDisforme());
-                habs.add(new Teletransporte());
-                habs.add(new Ilusion());
+                habs.add(new EfectoDanoArea("Rayo de Cambio", 5, "Un rayo de energía de Tzeentch que afecta a todos.", true, "ofensiva", 55));
+                habs.add(new EfectoEscudoInvulnerable("Escudo Disforme", 5, "Crea una barrera de energía caótica.", false, "buf"));
+                habs.add(new EfectoBufVelocidad("Teletransporte", 5, "Se desplaza instantáneamente a otra posición.", false, "movimiento", 30));
+                habs.add(new EfectoDebufPrecisionArea("Ilusión", 4, "Engaña los sentidos del enemigo.", true, "debuf", 15));
                 break;
             case ENGENDRO:
-                habs.add(new Mutacion());
-                habs.add(new Embestida());
-                habs.add(new Regeneracion());
-                habs.add(new Alarido());
+                habs.add(new EfectoCuracionIndividual("Mutación", 3, "El cuerpo muta rápidamente para sanar heridas.", true, "curacion", 25));
+                habs.add(new EfectoDanoArea("Embestida", 4, "Carga con fuerza bruta contra toda la línea enemiga.", false, "ofensiva", 35));
+                habs.add(new EfectoCuracionSostenida("Regeneración", 4, "El organismo se regenera con el tiempo (4T).", true, "curacion", 4));
+                habs.add(new EfectoDebufPrecisionArea("Alarido", 3, "Grito aterrador que desmoraliza al enemigo.", true, "debuf", 15));
                 break;
         }
         return new Entidad(nombre, faccion, vida, arma.crearInstancia(), armadura.crearInstancia(), habs);
     }
 
-    public String getFaccion() { return this.faccion; }
-    public String getNombre() { return this.nombre; }
+    public String getFaccion() {
+        return this.faccion;
+    }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public static List<ListaEnemigos> obtenerPorFaccion(String faccion) {
+        List<ListaEnemigos> lista = new ArrayList<>();
+        for (ListaEnemigos e : ListaEnemigos.values()) {
+            if (e.getFaccion().equals(faccion)) {
+                lista.add(e);
+            }
+        }
+        return lista;
+    }
 }
