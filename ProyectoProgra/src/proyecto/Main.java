@@ -33,6 +33,8 @@ public class Main {
                 scanner.next();
             }
         }
+        scanner.close(); // Cierra el scanner para liberar el recurso
+
         int maxEnemigos = 8;
         int tiposEnemigos = 6;
 
