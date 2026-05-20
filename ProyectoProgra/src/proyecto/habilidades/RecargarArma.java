@@ -13,6 +13,14 @@ import proyecto.Habilidades;
  */
 public class RecargarArma extends Habilidades {
 
+    /**
+     * Constructor de RecargarArma.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public RecargarArma(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }

@@ -13,6 +13,15 @@ import java.util.Scanner;
  */
 public class Main {
 
+    /**
+     * Constructor por defecto.
+     */
+    public Main() {}
+
+    /**
+     * Metodo principal que ejecuta la aplicacion.
+     * @param args Argumentos de linea de comandos.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=== SELECCIONE LA DIFICULTAD ===");

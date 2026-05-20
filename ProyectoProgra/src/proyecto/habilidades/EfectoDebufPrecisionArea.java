@@ -11,6 +11,15 @@ public class EfectoDebufPrecisionArea extends Habilidades {
 
     private final int reduccionPrecision;
 
+    /**
+     * Constructor de EfectoDebufPrecisionArea.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     * @param reduccion parametro.
+     */
     public EfectoDebufPrecisionArea(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo,
             int reduccion) {
         super(nombre, cooldownBase, efecto, distancia, tipo);

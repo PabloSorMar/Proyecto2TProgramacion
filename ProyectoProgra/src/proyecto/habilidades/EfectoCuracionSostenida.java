@@ -6,12 +6,21 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto mecÃ¡nico: Aplica curaciÃ³n sostenida (HoT) por varios turnos.
+ * Efecto mecánico: Aplica curación sostenida (HoT) por varios turnos.
  */
 public class EfectoCuracionSostenida extends Habilidades {
 
     private final int turnosCuracion;
 
+    /**
+     * Constructor de EfectoCuracionSostenida.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     * @param turnos parametro.
+     */
     public EfectoCuracionSostenida(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo, int turnos) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
         this.turnosCuracion = turnos;

@@ -6,10 +6,18 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto: Reduce la precisiÃ³n de un solo objetivo aleatorio.
+ * Efecto: Reduce la precisión de un solo objetivo aleatorio.
  */
 public class DebufPrecisionIndividual extends Habilidades {
 
+    /**
+     * Constructor de DebufPrecisionIndividual.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public DebufPrecisionIndividual(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }

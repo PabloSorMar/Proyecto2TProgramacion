@@ -12,6 +12,14 @@ import proyecto.Habilidades;
  */
 public class VenenoAreaGlobal extends Habilidades {
 
+    /**
+     * Constructor de VenenoAreaGlobal.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public VenenoAreaGlobal(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }

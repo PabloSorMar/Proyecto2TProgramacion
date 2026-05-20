@@ -6,17 +6,35 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto mecÃ¡nico: Aplica sangrado (hemorragia) por un nÃºmero determinado de turnos.
+ * Efecto mecánico: Aplica sangrado (hemorragia) por un número determinado de turnos.
  */
 public class EfectoHemorragia extends Habilidades {
 
     private final int turnosHemorragia;
 
+    /**
+     * Constructor de EfectoHemorragia.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param tipo parametro.
+     * @param precision parametro.
+     * @param turnos parametro.
+     */
     public EfectoHemorragia(String nombre, int cooldownBase, String efecto, String tipo, int precision, int turnos) {
         super(nombre, cooldownBase, efecto, tipo, precision);
         this.turnosHemorragia = turnos;
     }
 
+    /**
+     * Constructor de EfectoHemorragia.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param aDistancia parametro.
+     * @param tipo parametro.
+     * @param turnos parametro.
+     */
     public EfectoHemorragia(String nombre, int cooldownBase, String efecto, boolean aDistancia, String tipo, int turnos) {
         super(nombre, cooldownBase, efecto, aDistancia, tipo);
         this.turnosHemorragia = turnos;

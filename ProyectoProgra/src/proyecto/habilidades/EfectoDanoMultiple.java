@@ -6,19 +6,39 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto mecÃ¡nico: DaÃ±o a mÃºltiples objetivos aleatorios.
+ * Efecto mecánico: Daño a múltiples objetivos aleatorios.
  */
 public class EfectoDanoMultiple extends Habilidades {
 
     private final int numObjetivos;
     private final int danoPorObjetivo;
 
+    /**
+     * Constructor de EfectoDanoMultiple.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param tipo parametro.
+     * @param precision parametro.
+     * @param num parametro.
+     * @param dano parametro.
+     */
     public EfectoDanoMultiple(String nombre, int cooldownBase, String efecto, String tipo, int precision, int num, int dano) {
         super(nombre, cooldownBase, efecto, tipo, precision);
         this.numObjetivos = num;
         this.danoPorObjetivo = dano;
     }
 
+    /**
+     * Constructor de EfectoDanoMultiple.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param aDistancia parametro.
+     * @param tipo parametro.
+     * @param num parametro.
+     * @param dano parametro.
+     */
     public EfectoDanoMultiple(String nombre, int cooldownBase, String efecto, boolean aDistancia, String tipo, int num, int dano) {
         super(nombre, cooldownBase, efecto, aDistancia, tipo);
         this.numObjetivos = num;

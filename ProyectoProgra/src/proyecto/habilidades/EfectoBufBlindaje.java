@@ -11,6 +11,15 @@ public class EfectoBufBlindaje extends Habilidades {
 
     private final int aumentoBlindaje;
 
+    /**
+     * Constructor de EfectoBufBlindaje.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     * @param aumento parametro.
+     */
     public EfectoBufBlindaje(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo, int aumento) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
         this.aumentoBlindaje = aumento;

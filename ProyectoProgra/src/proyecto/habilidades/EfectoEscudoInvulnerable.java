@@ -9,6 +9,14 @@ import proyecto.Habilidades;
  */
 public class EfectoEscudoInvulnerable extends Habilidades {
 
+    /**
+     * Constructor de EfectoEscudoInvulnerable.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public EfectoEscudoInvulnerable(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }

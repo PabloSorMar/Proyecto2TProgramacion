@@ -12,6 +12,15 @@ public class EfectoBufVelocidad extends Habilidades {
 
     private final int aumentoVelocidad;
 
+    /**
+     * Constructor de EfectoBufVelocidad.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     * @param aumento parametro.
+     */
     public EfectoBufVelocidad(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo, int aumento) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
         this.aumentoVelocidad = aumento;

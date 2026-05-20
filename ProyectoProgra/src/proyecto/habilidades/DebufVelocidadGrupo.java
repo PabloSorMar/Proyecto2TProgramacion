@@ -10,6 +10,14 @@ import proyecto.Habilidades;
  */
 public class DebufVelocidadGrupo extends Habilidades {
 
+    /**
+     * Constructor de DebufVelocidadGrupo.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public DebufVelocidadGrupo(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }

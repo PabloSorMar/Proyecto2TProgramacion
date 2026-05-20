@@ -6,19 +6,39 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto mecÃ¡nico: Aplica veneno varias veces a objetivos aleatorios.
+ * Efecto mecánico: Aplica veneno varias veces a objetivos aleatorios.
  */
 public class EfectoVenenoMultiple extends Habilidades {
 
     private final int numObjetivos;
     private final int turnosVeneno;
 
+    /**
+     * Constructor de EfectoVenenoMultiple.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param tipo parametro.
+     * @param precision parametro.
+     * @param num parametro.
+     * @param turnos parametro.
+     */
     public EfectoVenenoMultiple(String nombre, int cooldownBase, String efecto, String tipo, int precision, int num, int turnos) {
         super(nombre, cooldownBase, efecto, tipo, precision);
         this.numObjetivos = num;
         this.turnosVeneno = turnos;
     }
 
+    /**
+     * Constructor de EfectoVenenoMultiple.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param aDistancia parametro.
+     * @param tipo parametro.
+     * @param num parametro.
+     * @param turnos parametro.
+     */
     public EfectoVenenoMultiple(String nombre, int cooldownBase, String efecto, boolean aDistancia, String tipo, int num, int turnos) {
         super(nombre, cooldownBase, efecto, aDistancia, tipo);
         this.numObjetivos = num;

@@ -6,10 +6,18 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto: Aplica curaciÃ³n sostenida (HoT) a mÃºltiples aliados aleatorios.
+ * Efecto: Aplica curación sostenida (HoT) a múltiples aliados aleatorios.
  */
 public class CuracionSostenidaMultiple extends Habilidades {
 
+    /**
+     * Constructor de CuracionSostenidaMultiple.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public CuracionSostenidaMultiple(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }

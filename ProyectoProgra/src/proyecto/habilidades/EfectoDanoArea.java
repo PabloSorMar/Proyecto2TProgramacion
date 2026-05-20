@@ -6,17 +6,35 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto mecÃ¡nico: DaÃ±o en Ã¡rea que afecta a todos los objetivos.
+ * Efecto mecánico: Daño en área que afecta a todos los objetivos.
  */
 public class EfectoDanoArea extends Habilidades {
 
     private final int danoArea;
 
+    /**
+     * Constructor de EfectoDanoArea.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param tipo parametro.
+     * @param precision parametro.
+     * @param dano parametro.
+     */
     public EfectoDanoArea(String nombre, int cooldownBase, String efecto, String tipo, int precision, int dano) {
         super(nombre, cooldownBase, efecto, tipo, precision);
         this.danoArea = dano;
     }
 
+    /**
+     * Constructor de EfectoDanoArea.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param aDistancia parametro.
+     * @param tipo parametro.
+     * @param dano parametro.
+     */
     public EfectoDanoArea(String nombre, int cooldownBase, String efecto, boolean aDistancia, String tipo, int dano) {
         super(nombre, cooldownBase, efecto, aDistancia, tipo);
         this.danoArea = dano;

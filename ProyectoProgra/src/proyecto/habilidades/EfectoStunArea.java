@@ -11,6 +11,15 @@ public class EfectoStunArea extends Habilidades {
 
     private final int turnosStun;
 
+    /**
+     * Constructor de EfectoStunArea.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     * @param turnos parametro.
+     */
     public EfectoStunArea(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo, int turnos) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
         this.turnosStun = turnos;

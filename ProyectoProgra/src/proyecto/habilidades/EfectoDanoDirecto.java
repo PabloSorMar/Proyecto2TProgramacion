@@ -6,17 +6,35 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto mecÃ¡nico: Realiza daÃ±o directo restando el blindaje del objetivo.
+ * Efecto mecánico: Realiza daño directo restando el blindaje del objetivo.
  */
 public class EfectoDanoDirecto extends Habilidades {
 
     private final int danoBase;
 
+    /**
+     * Constructor de EfectoDanoDirecto.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param tipo parametro.
+     * @param precision parametro.
+     * @param dano parametro.
+     */
     public EfectoDanoDirecto(String nombre, int cooldownBase, String efecto, String tipo, int precision, int dano) {
         super(nombre, cooldownBase, efecto, tipo, precision);
         this.danoBase = dano;
     }
 
+    /**
+     * Constructor de EfectoDanoDirecto.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param aDistancia parametro.
+     * @param tipo parametro.
+     * @param dano parametro.
+     */
     public EfectoDanoDirecto(String nombre, int cooldownBase, String efecto, boolean aDistancia, String tipo, int dano) {
         super(nombre, cooldownBase, efecto, aDistancia, tipo);
         this.danoBase = dano;

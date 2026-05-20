@@ -10,6 +10,14 @@ import proyecto.Habilidades;
  */
 public class DebufVelocidadIndividual extends Habilidades {
 
+    /**
+     * Constructor de DebufVelocidadIndividual.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public DebufVelocidadIndividual(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }

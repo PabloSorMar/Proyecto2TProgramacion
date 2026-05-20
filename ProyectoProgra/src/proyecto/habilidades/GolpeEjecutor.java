@@ -8,15 +8,31 @@ import proyecto.Habilidades;
 
 /**
  * Golpe ejecutor: elimina al instante a un objetivo si su vida es baja (menor o igual a 60).
- * Si el objetivo tiene mas vida, inflige 35 de daÃ±o ignorando blindaje.
+ * Si el objetivo tiene mas vida, inflige 35 de daño ignorando blindaje.
  * Usado para Eutanasia, Odio Eterno, etc.
  */
 public class GolpeEjecutor extends Habilidades {
 
+    /**
+     * Constructor de GolpeEjecutor.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param tipo parametro.
+     * @param precision parametro.
+     */
     public GolpeEjecutor(String nombre, int cooldownBase, String efecto, String tipo, int precision) {
         super(nombre, cooldownBase, efecto, tipo, precision);
     }
 
+    /**
+     * Constructor de GolpeEjecutor.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param aDistancia parametro.
+     * @param tipo parametro.
+     */
     public GolpeEjecutor(String nombre, int cooldownBase, String efecto, boolean aDistancia, String tipo) {
         super(nombre, cooldownBase, efecto, aDistancia, tipo);
     }

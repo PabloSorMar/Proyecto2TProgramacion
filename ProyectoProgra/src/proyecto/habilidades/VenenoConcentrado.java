@@ -6,8 +6,19 @@ import java.util.Random;
 import proyecto.Entidad;
 import proyecto.Habilidades;
 
+/**
+ * Clase VenenoConcentrado.
+ */
 public class VenenoConcentrado  extends Habilidades{
 
+    /**
+     * Constructor de VenenoConcentrado.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public VenenoConcentrado(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
   

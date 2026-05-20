@@ -60,95 +60,210 @@ public class Entidad {
     }
 
     // SETTERS Y GETTERS
+    /**
+     * Metodo getNombre.
+     * 
+     * @return getNombre valor.
+     */
     public String getNombre() {
         return this.nombre;
     }
 
+    /**
+     * Metodo getFaccion.
+     * 
+     * @return getFaccion valor.
+     */
     public String getFaccion() {
         return this.faccion;
     }
 
+    /**
+     * Metodo getVida.
+     * 
+     * @return getVida valor.
+     */
     public int getVida() {
         return this.vida;
     }
 
+    /**
+     * Metodo getTurnoStun.
+     * 
+     * @return getTurnoStun valor.
+     */
     public int getTurnoStun() {
         return this.turnoStun;
     }
 
+    /**
+     * Metodo getTurnoHemorragia.
+     * 
+     * @return getTurnoHemorragia valor.
+     */
     public int getTurnoHemorragia() {
         return this.turnoHemorragia;
     }
 
+    /**
+     * Metodo getTurnoVeneno.
+     * 
+     * @return getTurnoVeneno valor.
+     */
     public int getTurnoVeneno() {
         return this.turnoVeneno;
     }
 
+    /**
+     * Metodo getTurnoCuracion.
+     * 
+     * @return getTurnoCuracion valor.
+     */
     public int getTurnoCuracion() {
         return this.turnoCuracion;
     }
 
+    /**
+     * Metodo getDefendido.
+     * 
+     * @return getDefendido valor.
+     */
     public boolean getDefendido() {
         return this.defendido;
     }
 
+    /**
+     * Metodo getArma.
+     * 
+     * @return getArma valor.
+     */
     public Arma getArma() {
         return this.arma;
     }
 
+    /**
+     * Metodo getArmadura.
+     * 
+     * @return getArmadura valor.
+     */
     public Armaduras getArmadura() {
         return this.armadura;
     }
 
+    /**
+     * Metodo getHabilidades.
+     * 
+     * @return getHabilidades valor.
+     */
     public List<Habilidades> getHabilidades() {
         return this.habilidades;
     }
 
+    /**
+     * Metodo setNombre.
+     * 
+     * @param nombre parametro.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Metodo setFaccion.
+     * 
+     * @param faccion parametro.
+     */
     public void setFaccion(String faccion) {
         this.faccion = faccion;
     }
 
+    /**
+     * Metodo setVida.
+     * 
+     * @param vida parametro.
+     */
     public void setVida(int vida) {
         this.vida = vida;
     }
 
+    /**
+     * Metodo setTurnoStun.
+     * 
+     * @param turnoStun parametro.
+     */
     public void setTurnoStun(int turnoStun) {
         this.turnoStun = turnoStun;
     }
 
+    /**
+     * Metodo setTurnoHemorragia.
+     * 
+     * @param turnoHemorragia parametro.
+     */
     public void setTurnoHemorragia(int turnoHemorragia) {
         this.turnoHemorragia = turnoHemorragia;
     }
 
+    /**
+     * Metodo setTurnoVeneno.
+     * 
+     * @param turnoVeneno parametro.
+     */
     public void setTurnoVeneno(int turnoVeneno) {
         this.turnoVeneno = turnoVeneno;
     }
 
+    /**
+     * Metodo setTurnoCuracion.
+     * 
+     * @param turnoCuracion parametro.
+     */
     public void setTurnoCuracion(int turnoCuracion) {
         this.turnoCuracion = turnoCuracion;
     }
 
+    /**
+     * Metodo setDefendido.
+     * 
+     * @param defendido parametro.
+     */
     public void setDefendido(boolean defendido) {
         this.defendido = defendido;
     }
 
+    /**
+     * Metodo setArma.
+     * 
+     * @param arma parametro.
+     */
     public void setArma(Arma arma) {
         this.arma = arma;
     }
 
+    /**
+     * Metodo setArmadura.
+     * 
+     * @param armadura parametro.
+     */
     public void setArmadura(Armaduras armadura) {
         this.armadura = armadura;
     }
 
+    /**
+     * Metodo setHabilidades.
+     * 
+     * @param habilidades parametro.
+     */
     public void setHabilidades(List<Habilidades> habilidades) {
         this.habilidades = habilidades;
     }
 
     // Devuelve el codigo ANSI de color segun la faccion de la entidad
+    /**
+     * Metodo getColorFaccion.
+     * 
+     * @return getColorFaccion valor.
+     */
     public String getColorFaccion() {
         switch (this.faccion) {
             case "Astra Militarum":
