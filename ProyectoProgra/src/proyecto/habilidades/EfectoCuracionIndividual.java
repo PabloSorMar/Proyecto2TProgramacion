@@ -32,14 +32,14 @@ public class EfectoCuracionIndividual extends Habilidades {
             Random ran = new Random();
             if (ran.nextInt(0, 100) < this.getPrecision()) {
                 Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-                System.out.println("La habilidad " + this.getNombre() + " cura a " + objetivo.getNombre() + " (+" + curacionBase + " vida)");
+                System.out.println("  La habilidad " + this.getNombre() + " cura a " + objetivo.getNombre() + " (+" + curacionBase + " vida)");
                 objetivo.setVida(objetivo.getVida() + curacionBase);
             } else {
-                System.out.println("La habilidad " + this.getNombre() + " falla");
+                System.out.println("  La habilidad " + this.getNombre() + " falla");
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

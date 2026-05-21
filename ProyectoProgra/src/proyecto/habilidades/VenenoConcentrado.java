@@ -34,19 +34,19 @@ public class VenenoConcentrado  extends Habilidades{
                 if (ran.nextInt(0,100) < this.getPrecision()) 
                 {
                     Entidad objetivo = objetivos.get(ran.nextInt(0,objetivos.size()));
-                    System.out.println("La habildiad "+ this.getNombre() + " impacta en "+ objetivo.getNombre());
+                    System.out.println("  La habildiad "+ this.getNombre() + " impacta en "+ objetivo.getNombre());
                     objetivo.setTurnoVeneno(4);
                 }
                 else
                 {
-                    System.out.println("La habildiad "+ this.getNombre() + " falla ");
+                    System.out.println("  La habildiad "+ this.getNombre() + " falla ");
                 } 
             
             super.usarHabilidad(); 
         }
         else
         {
-            System.out.println("La habildiad "+ this.getNombre() + " esta en cooldown");
+            System.out.println("  La habildiad "+ this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

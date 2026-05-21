@@ -28,13 +28,13 @@ public class EfectoStunArea extends Habilidades {
     @Override
     public void EjecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
-            System.out.println("La habilidad " + this.getNombre() + " aturde a todo el escuadrón enemigo.");
+            System.out.println("  La habilidad " + this.getNombre() + " aturde a todo el escuadrón enemigo.");
             for (Entidad objetivo : objetivos) {
                 objetivo.setTurnoStun(turnosStun);
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

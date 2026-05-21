@@ -44,18 +44,18 @@ public class GolpeEjecutor extends Habilidades {
             if (ran.nextInt(0, 100) < this.getPrecision()) {
                 Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
                 if (objetivo.getVida() <= 60) {
-                    System.out.println("La habilidad " + this.getNombre() + " EJECUTA a " + objetivo.getNombre() + "!");
+                    System.out.println("  La habilidad " + this.getNombre() + " EJECUTA a " + objetivo.getNombre() + "!");
                     objetivo.setVida(0);
                 } else {
-                    System.out.println("La habilidad " + this.getNombre() + " golpea a " + objetivo.getNombre() + " (vida demasiado alta para ejecutar, 35 de dano)");
+                    System.out.println("  La habilidad " + this.getNombre() + " golpea a " + objetivo.getNombre() + " (vida demasiado alta para ejecutar, 35 de dano)");
                     objetivo.setVida(objetivo.getVida() - 35);
                 }
             } else {
-                System.out.println("La habilidad " + this.getNombre() + " falla");
+                System.out.println("  La habilidad " + this.getNombre() + " falla");
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

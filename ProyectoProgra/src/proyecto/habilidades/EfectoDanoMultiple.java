@@ -52,17 +52,17 @@ public class EfectoDanoMultiple extends Habilidades {
             for (int i = 0; i < numObjetivos; i++) {
                 if (ran.nextInt(0, 100) < this.getPrecision()) {
                     Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-                    System.out.println("La habilidad " + this.getNombre() + " golpea a " + objetivo.getNombre());
+                    System.out.println("  La habilidad " + this.getNombre() + " golpea a " + objetivo.getNombre());
                     int danoFinal = danoPorObjetivo - objetivo.getArmadura().getBlindaje();
                     if (danoFinal < 0) danoFinal = 0;
                     objetivo.setVida(objetivo.getVida() - danoFinal);
                 } else {
-                    System.out.println("La habilidad " + this.getNombre() + " falla el impacto " + (i + 1));
+                    System.out.println("  La habilidad " + this.getNombre() + " falla el impacto " + (i + 1));
                 }
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

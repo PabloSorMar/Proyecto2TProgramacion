@@ -29,15 +29,15 @@ public class CuracionSostenidaMultiple extends Habilidades {
             for (int i = 0; i < 4; i++) {
                 if (ran.nextInt(0, 100) < this.getPrecision()) {
                     Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-                    System.out.println("La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
+                    System.out.println("  La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
                     objetivo.setTurnoCuracion(1);
                 } else {
-                    System.out.println("La habilidad " + this.getNombre() + " falla el impacto " + (i + 1));
+                    System.out.println("  La habilidad " + this.getNombre() + " falla el impacto " + (i + 1));
                 }
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

@@ -24,11 +24,11 @@ public class EfectoEscudoInvulnerable extends Habilidades {
     @Override
     public void EjecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
-            System.out.println("La habilidad " + this.getNombre() + " activa un escudo invulnerable.");
+            System.out.println("  La habilidad " + this.getNombre() + " activa un escudo invulnerable.");
             // Lógica de invulnerabilidad (si existe en Entidad, de lo contrario se asume que EscudoDefensivo la tiene)
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

@@ -323,7 +323,7 @@ public class Entidad {
         }
         // Primero efectos activo de daño en si mismo
         if (this.getTurnoStun() > 0) {
-            System.out.println(this.getNombre() + " esta arturdido");
+            System.out.println("  " + this.getNombre() + " esta arturdido");
             setTurnoStun(getTurnoStun() - 1);
         } else {
             aplicarEstadosAlterados();
@@ -343,21 +343,21 @@ public class Entidad {
                     ejecutarAtaque(aliados, armaAUsar, ran, 2);
                 }
             } else if (accion == 1) {// Activa posicion defensiva y recibir menos daño
-                System.out.println(this.getNombre() + " decide  colocarse en posicion defensiva");
+                System.out.println("  " + this.getNombre() + " decide  colocarse en posicion defensiva");
                 this.setDefendido(true);
             } else if (accion == 2) {// caso de utilizar habilidades
                 ejecutarHabilidadAleatoria(aliados, enemigos, personaje, ran);
             } else if (accion == 3) {// Accion de recargas las balas del arma
                 Arma armaRecarga = this.getArma();
                 if (armaRecarga.getMunicionMax() > 0) {
-                    System.out.println(this.getNombre() + " recarga su arma: " + armaRecarga.getNombre()
+                    System.out.println("  " + this.getNombre() + " recarga su arma: " + armaRecarga.getNombre()
                             + " (" + armaRecarga.getMunicionAct() + " -> " + armaRecarga.getMunicionMax() + ")");
                     armaRecarga.setMunicionAct(armaRecarga.getMunicionMax());
                 } else {
-                    System.out.println(this.getNombre() + " no necesita recargar (arma melee), pasa turno");
+                    System.out.println("  " + this.getNombre() + " no necesita recargar (arma melee), pasa turno");
                 }
             } else {
-                System.out.println(this.getNombre() + " decide pasar turno sin realizar ninguna accion");
+                System.out.println("  " + this.getNombre() + " decide pasar turno sin realizar ninguna accion");
             }
 
         }
@@ -382,16 +382,17 @@ public class Entidad {
                 if (ran.nextBoolean()) {
                     armaAUsar = heroeActual.getArma2();
                     System.out.println(
-                            this.getNombre() + " decide atacar con su ARMA SECUNDARIA: " + armaAUsar.getNombre());
+                            "  " + this.getNombre() + " decide atacar con su ARMA SECUNDARIA: "
+                                    + armaAUsar.getNombre());
                     return armaAUsar;
                 } else {
                     System.out.println(
-                            this.getNombre() + " decide atacar con su ARMA PRINCIPAL: " + armaAUsar.getNombre());
+                            "  " + this.getNombre() + " decide atacar con su ARMA PRINCIPAL: " + armaAUsar.getNombre());
                     return armaAUsar;
                 }
             }
         }
-        System.out.println(this.getNombre() + " decide atacar con su arma: " + armaAUsar.getNombre());
+        System.out.println("  " + this.getNombre() + " decide atacar con su arma: " + armaAUsar.getNombre());
         return armaAUsar;
     }
 
@@ -400,7 +401,7 @@ public class Entidad {
         int habilidad_aleatoria = ran.nextInt(0, this.getHabilidades().size());
         Habilidades habilidadElegida = this.getHabilidades().get(habilidad_aleatoria);
         String tipoHab = habilidadElegida.getTipo();
-        System.out.println(this.getNombre() + " decide usar una habilidad: " + habilidadElegida.getNombre());
+        System.out.println("  " + this.getNombre() + " decide usar una habilidad: " + habilidadElegida.getNombre());
 
         boolean dirigidaAEnemigos = tipoHab.equals("ofensiva") || tipoHab.equals("debuf");
         List<Entidad> objetivos = (aliados.contains(personaje) == dirigidaAEnemigos) ? enemigos : aliados;
@@ -431,10 +432,10 @@ public class Entidad {
                 break; // Todos muertos
 
             Entidad objetivo = objetivos.get(objetivo_aleatorio);
-            System.out.print("Objetivo " + (i + 1) + ": " + objetivo.getNombre() + "\n");
+            System.out.print("  Objetivo " + (i + 1) + ": " + objetivo.getNombre() + "\n");
 
             for (int j = 0; j < armaAUsar.getNumAtaques(); j++) {
-                System.out.println("Ataque numero " + (j + 1));
+                System.out.println("    Ataque numero " + (j + 1));
 
                 int blindajeEfectivo = objetivo.getArmadura().getBlindaje();
                 if (objetivo.getDefendido()) {
@@ -443,7 +444,8 @@ public class Entidad {
 
                 if (!armaAUsar.getEsMelee()) {
                     if (armaAUsar.getMunicionAct() <= 0) {
-                        System.out.println(armaAUsar.getNombre() + " sin municion, recargando y fin de turno!");
+                        System.out
+                                .println("    " + armaAUsar.getNombre() + " sin municion, recargando y fin de turno!");
                         armaAUsar.setMunicionAct(armaAUsar.getMunicionMax());
                         return; // Termina el turno
                     }
@@ -453,9 +455,9 @@ public class Entidad {
                 if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
                     boolean esCritico = ran.nextInt(1, 7) == 1;
                     if (esCritico) {
-                        System.out.println("CRITICO");
+                        System.out.println("    CRITICO");
                     } else {
-                        System.out.println("Golpe normal");
+                        System.out.println("    Golpe normal");
                     }
 
                     int daño = armaAUsar.getDaño();
@@ -465,7 +467,7 @@ public class Entidad {
                     }
                     objetivo.setVida(objetivo.getVida() - daño_final);
                 } else {
-                    System.out.println("No golpea al objetivo el ataque ");
+                    System.out.println("    No golpea al objetivo el ataque ");
                 }
             }
         }

@@ -12,18 +12,84 @@ import java.util.Scanner;
  * velocidad.
  */
 public class Main {
-
-    /**
-     * Constructor por defecto.
-     */
-    public Main() {}
-
     /**
      * Metodo principal que ejecuta la aplicacion.
+     * 
      * @param args Argumentos de linea de comandos.
      */
     public static void main(String[] args) {
+        System.out.print("\u001B[32m"); // Color verde (Adeptus Mechanicus)
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Bienvenido al RPG de Warhammer 40k");
+        System.out.println(
+                "@@@@@@@@@@@@@@@@@@%@@%@@@@%@@@@@@@@@@@@@@@@@@@@@@%@%@@*                                         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@  ");
+        System.out.println(
+                "    #@@@@@@@@@@@@@@@@@@@@@%@@@@@@@%@@@@@@%%@@@@@*    @@#                                             %%#    %%%%%%%%%%%%%%%%%%%%%%%%%%%@%%%%%%@%@%@@@@@@#    ");
+        System.out.println(
+                "      @@@                                            %                                                %%                                           :@@@      ");
+        System.out.println(
+                "                                                    %%            @%%@                 %%%%            %%                                                    ");
+        System.out.println(
+                "                                    #%@@@%@@@+     @%         -@%   %-  %.         +%  #%   %%.         %%     %%%%%%%%%=                                    ");
+        System.out.println(
+                "                   *@@@@@@@@@@@@@@@%=             .%%         %%:      %%%%+     %%%%%      #%%         %%              %%%%%%%%%%%%%%%%%:                   ");
+        System.out.println(
+                "            @@@@@@@@@@@@@@%-                    +%%%%                  %%%%%%   %%%%%*                  %%%%                     #%%%%%@%@@@%%%@%            ");
+        System.out.println(
+                "             -@@@@-                       %%%@    #%%                    %%%  %  %%%                    %%     %%%+                       #%%%%              ");
+        System.out.println(
+                "                                    @@@%%:        *@@                     %   %  %                     %%%         %%%%%%                                    ");
+        System.out.println(
+                "                             .@%@%%@%          #%   @%.             %@%      %%%      %%%             %%%   %           %%%%%%@                              ");
+        System.out.println(
+                "                       #@@@@@%@@.           @@      @%%%%%    %%%%%%%%%%    -%%%    %%%%%%%%%%%    %%%%%%     #%#           #%%%%%%%%.                       ");
+        System.out.println(
+                "                     @@%@@@@             %%@      %%   %%%%%%%%%%%%   %%%%  %%%%@  %%%+  #%%%%%%%%%%%%  %%=      %%%             @%%%@%@                     ");
+        System.out.println(
+                "                                      @%%       -%%    %   %      %+  %%%  %%%%%%   %%   %=  %   %   %    %%       #%%%              #                       ");
+        System.out.println(
+                "                                  #@@@%        %%:    %    -   %      %%+  %%%%%%%  %%%      %   %   #     %%%        %%%%                                   ");
+        System.out.println(
+                "                               @%@@%         %%@     %%   %   @%     %%%  %%%%%%%%   %%      %    %   %      %%%        #%%%%*                               ");
+        System.out.println(
+                "                             @%@@%         #%%+     %%   -%   %%=   %%%   %%%%%%%%%  #%%    %%%   %    %      %%%          %%%%%                             ");
+        System.out.println(
+                "                                          @%@      @%    %.   %    %%%%  %%%%%%%%%%=  %%%%    %   %%   :%       %%%          +                               ");
+        System.out.println(
+                "                                        %@%%      @%+   #@   #   -%%%%   %%%%%%%%%%%   %%%%        %    %%       %%%%                                        ");
+        System.out.println(
+                "                                      @%%@       %%%    %%        %%@   %%%%%%%%%%%%%  %%%%        %%    %%        %%%-                                      ");
+        System.out.println(
+                "                                      %@@       @%@    @@           %   %%%%%%@%%%%%%   -          %%     %%        %%%                                      ");
+        System.out.println(
+                "                                               %@@     *               %@%%%%%%%%%%%%%               %    %%%                                                ");
+        System.out.println(
+                "                                              @%%@                    :%%%%%%%%%@%%%%%                     %%%                                               ");
+        System.out.println(
+                "                                                                       =@%@%%%%%%%%%%                                                                        ");
+        System.out.println(
+                "                                                                          %%@%%%%%%                                                                          ");
+        System.out.println(
+                "                                                                     @%     %%%%% :  #%                                                                      ");
+        System.out.println(
+                "                                                                    %%   = .  % %  %   %                                                                     ");
+        System.out.println(
+                "                                                                   *%   %  %  %  %  %   %                                                                    ");
+        System.out.println(
+                "                                                                  -*   %  %# %%  %  .%   %%    %                                                             ");
+        System.out.println(
+                "                                                             %   %=       %  %@# #@      %:    %                                                             ");
+        System.out.println(
+                "                                                                    *    %%  %@@  %     %                                                                    ");
+        System.out.println(
+                "                                                               %    %%      +%%%      .@%   #                                                                ");
+        System.out.println(
+                "                                                              %             %%%%             %                                                               ");
+        System.out.println(
+                "                                                             @@               %               %                                                              ");
+        System.out.println(
+                "                                                              @                               #                                                              ");
+        System.out.println();
         System.out.println("=== SELECCIONE LA DIFICULTAD ===");
         System.out.println("1. Minima");
         System.out.println("2. Despiadada");
@@ -135,6 +201,7 @@ public class Main {
             // =============================================
             // 5. COMBATE
             // =============================================
+            System.out.print("\u001B[0m"); // Restablecer color para el combate
             System.out.println("\n--- INICIO DEL COMBATE ---");
 
             while (aliados.size() > 0 && enemigos.size() > 0) {
@@ -148,7 +215,6 @@ public class Main {
 
                     if (perso.getVida() > 0 && aliados.size() > 0 && enemigos.size() > 0) {
                         perso.RealizarTurno(aliados, enemigos, perso);
-
                         eliminarMuertos(aliados, true);
                         eliminarMuertos(enemigos, true);
                     }
@@ -160,6 +226,7 @@ public class Main {
             // =============================================
             // 6. RESULTADO DE LA MISION
             // =============================================
+            System.out.print("\u001B[32m"); // Volver al color verde (Adeptus Mechanicus)
             if (enemigos.size() == 0 && aliados.size() > 0) {
                 // VICTORIA: los heroes han ganado esta mision
                 System.out.println("\n--- MISION COMPLETADA ---");
@@ -175,8 +242,10 @@ public class Main {
                 // DERROTA: los heroes han muerto
                 System.out.println("\n================================================");
                 System.out.println("  MISION FALLIDA, EL PLANETA HA CAIDO.");
+                System.out.println("  Misiones completadas: " + (misionNumero - 1));
                 System.out.println("  COMENZANDO EXTERMINATUS");
                 System.out.println("================================================");
+                System.out.print("\u001B[0m"); // Restablecer color al salir
                 break; // Fin del juego
             }
         }

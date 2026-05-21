@@ -45,16 +45,16 @@ public class EfectoDanoArea extends Habilidades {
         if (super.estaDisponible()) {
             Random ran = new Random();
             if (ran.nextInt(0, 100) < this.getPrecision()) {
-                System.out.println("La habilidad " + this.getNombre() + " impacta en todos los objetivos");
+                System.out.println("  La habilidad " + this.getNombre() + " impacta en todos los objetivos");
                 for (Entidad objetivo : objetivos) {
                     objetivo.setVida(objetivo.getVida() - danoArea);
                 }
             } else {
-                System.out.println("La habilidad " + this.getNombre() + " falla");
+                System.out.println("  La habilidad " + this.getNombre() + " falla");
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

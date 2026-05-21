@@ -31,11 +31,11 @@ public class EfectoBufPrecision extends Habilidades {
         if (super.estaDisponible()) {
             Random ran = new Random();
             Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-            System.out.println("La habilidad " + this.getNombre() + " aumenta la puntería de " + objetivo.getNombre() + " (+" + aumentoPrecision + ")");
+            System.out.println("  La habilidad " + this.getNombre() + " aumenta la puntería de " + objetivo.getNombre() + " (+" + aumentoPrecision + ")");
             objetivo.getArma().setPrecision(objetivo.getArma().getPrecision() + aumentoPrecision);
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

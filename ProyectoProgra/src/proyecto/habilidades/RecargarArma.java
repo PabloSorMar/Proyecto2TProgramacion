@@ -30,7 +30,7 @@ public class RecargarArma extends Habilidades {
         if (super.estaDisponible()) {
             Random ran = new Random();
             Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-            System.out.println("La habilidad " + this.getNombre() + " recarga el arma de " + objetivo.getNombre());
+            System.out.println("  La habilidad " + this.getNombre() + " recarga el arma de " + objetivo.getNombre());
             if (objetivo.getArma().getMunicionMax() > 0) {
                 objetivo.getArma().setMunicionAct(objetivo.getArma().getMunicionMax());
                 System.out.println("  Municion restaurada a " + objetivo.getArma().getMunicionMax());
@@ -39,7 +39,7 @@ public class RecargarArma extends Habilidades {
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

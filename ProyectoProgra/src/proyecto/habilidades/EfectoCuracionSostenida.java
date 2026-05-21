@@ -32,14 +32,14 @@ public class EfectoCuracionSostenida extends Habilidades {
             Random ran = new Random();
             if (ran.nextInt(0, 100) < this.getPrecision()) {
                 Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-                System.out.println("La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
+                System.out.println("  La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
                 objetivo.setTurnoCuracion(turnosCuracion);
             } else {
-                System.out.println("La habilidad " + this.getNombre() + " falla");
+                System.out.println("  La habilidad " + this.getNombre() + " falla");
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

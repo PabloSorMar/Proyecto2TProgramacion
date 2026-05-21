@@ -29,12 +29,12 @@ public class EfectoBufBlindaje extends Habilidades {
     public void EjecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             for (Entidad objetivo : objetivos) {
-                System.out.println("La habilidad " + this.getNombre() + " aumenta el blindaje de " + objetivo.getNombre());
+                System.out.println("  La habilidad " + this.getNombre() + " aumenta el blindaje de " + objetivo.getNombre());
                 objetivo.getArmadura().setBlindaje(objetivo.getArmadura().getBlindaje() + aumentoBlindaje);
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }
