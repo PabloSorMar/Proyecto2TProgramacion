@@ -1,0 +1,186 @@
+package proyecto;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+import utils.Utils;
+
+/**
+ * Clase principal que gestiona el ciclo de vida de la campaña Warhammer 40k.
+ * Se encarga de la selección aleatoria de facciones, héroes y misiones.
+ * Implementa el bucle de misiones y el sistema de combate por turnos basado en
+ * velocidad.
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        Random ran = new Random();
+
+        List<Entidad> aliados = new ArrayList<>();
+        List<Entidad> enemigos = new ArrayList<>();
+        List<Entidad> personajes = new ArrayList<>();
+
+        // =============================================
+        // 1. FACCION DE JUGADORES ALEATORIA (se elige una sola vez)
+        // =============================================
+        String nombreFaccion;
+        int numHeroesAElegir;
+        if (ran.nextInt(2) == 0) {
+            nombreFaccion = "Astra Militarum";
+            numHeroesAElegir = 4;
+        } else {
+            nombreFaccion = "Deathwatch";
+            numHeroesAElegir = 2;
+        }
+        System.out.println("=== FACCION DE JUGADORES: " + nombreFaccion.toUpperCase() + " ===");
+
+        // Obtener heroes de esa faccion en lista mutable para poder quitarlos al elegir
+        List<ListaHeroes> heroesDeFaccion = ListaHeroes.obtenerPorFaccion(nombreFaccion);
+
+        // =============================================
+        // 2. SELECCION ALEATORIA DE HEROES (sin repeticion, se guarda para restaurar)
+        // =============================================
+        List<ListaHeroes> heroesSeleccionados = new ArrayList<>();
+        System.out.println("Heroes elegidos:");
+        for (int i = 0; i < numHeroesAElegir; i++) {
+            int indice = ran.nextInt(heroesDeFaccion.size());
+            ListaHeroes heroElegido = heroesDeFaccion.get(indice);
+            heroesDeFaccion.remove(indice); // Se elimina para no repetir
+            heroesSeleccionados.add(heroElegido); // Guardar para restaurar entre misiones
+            System.out.println("  " + (i + 1) + ". " + heroElegido.getNombre());
+        }
+
+        String[] facciones = { "Orkos", "Necrones", "Tiránidos", "Aeldari", "T'au", "Caos" };
+        int misionNumero = 1;
+        int idPartida = 1; // Asumiendo 1 por defecto, cambiar si idPartida viene de base de datos
+        int numTurno = 1;
+
+        // =============================================
+        // BUCLE DE CAMPAÑA: se repite hasta que los heroes mueran
+        // =============================================
+        while (true) {
+
+            System.out.println("\n========================================");
+            System.out.println("          MISION " + misionNumero);
+            System.out.println("========================================");
+
+            // Restaurar heroes al completo (vida y revivir muertos)
+            aliados.clear();
+            for (ListaHeroes h : heroesSeleccionados) {
+                aliados.add(h.crearInstancia());
+            }
+
+            // =============================================
+            // 3. FACCION ENEMIGA ALEATORIA (nueva cada mision)
+            // =============================================
+            String faccionEnemiga = facciones[ran.nextInt(facciones.length)];
+            System.out.println("Faccion enemiga: " + faccionEnemiga.toUpperCase());
+
+            List<ListaEnemigos> enemigosDeFaccion = ListaEnemigos.obtenerPorFaccion(faccionEnemiga);
+
+            // =============================================
+            // 4. NUMERO ALEATORIO DE ENEMIGOS (1-8)
+            // =============================================
+            int numEnemigos = ran.nextInt(1, 9);
+            enemigos.clear();
+            System.out.println("Numero de enemigos: " + numEnemigos);
+            for (int i = 0; i < numEnemigos; i++) {
+                ListaEnemigos enemigoAleatorio = enemigosDeFaccion.get(ran.nextInt(enemigosDeFaccion.size()));
+                enemigos.add(enemigoAleatorio.crearInstancia());
+                System.out.println("  Enemigo " + (i + 1) + ": " + enemigoAleatorio.getNombre());
+            }
+
+            // =============================================
+            // 5. COMBATE
+            // =============================================
+            System.out.println("\n--- INICIO DEL COMBATE ---");
+            numTurno = 1;
+
+            while (aliados.size() > 0 && enemigos.size() > 0) {
+                // Reconstruir personajes ordenado por velocidad (mayor = primero)
+                personajes.clear();
+                agregarOrdenadoPorVelocidad(personajes, aliados);
+                agregarOrdenadoPorVelocidad(personajes, enemigos);
+
+                for (int i = 0; i < personajes.size(); i++) {
+                    Entidad perso = personajes.get(i);
+
+                    if (perso.getVida() > 0 && aliados.size() > 0 && enemigos.size() > 0) {
+                        perso.RealizarTurno(aliados, enemigos, perso);
+
+                        Utils.registrarKills(personajes, perso);
+
+                        eliminarMuertos(aliados, true);
+                        eliminarMuertos(enemigos, true);
+                    }
+                }
+
+                Utils.guardarPersonajesUsados(personajes, idPartida, misionNumero, numTurno);
+                numTurno++;
+
+                eliminarMuertos(personajes, false);
+            }
+
+            // =============================================
+            // 6. RESULTADO DE LA MISION
+            // =============================================
+            if (enemigos.size() == 0 && aliados.size() > 0) {
+                misionNumero++;
+                // VICTORIA: los heroes han ganado esta mision
+                System.out.println("\n--- MISION COMPLETADA ---");
+                System.out.println("Mision completada, volviendo a orbita...");
+                System.out.println("Supervivientes:");
+                for (Entidad e : aliados) {
+                    System.out.println("  - " + e.getNombre() + " (Vida restante: " + e.getVida() + ")");
+                }
+                System.out.println("Los heroes se recuperan para la siguiente mision.");
+
+                // El bucle continua: nueva mision con heroes restaurados
+            } else {
+                // DERROTA: los heroes han muerto
+                System.out.println("\n================================================");
+                System.out.println("  MISION FALLIDA, EL PLANETA HA CAIDO.");
+                System.out.println("  COMENZANDO EXTERMINATUS");
+                System.out.println("================================================");
+
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Introduce tu nombre para guardar la partida: ");
+                String nombreJugador = scanner.nextLine();
+                if (nombreJugador.length() > 50) {
+                    nombreJugador = nombreJugador.substring(0, 50);
+                }
+                Utils.guardarPartida(nombreJugador, misionNumero, numTurno);
+
+                break; // Fin del juego
+            }
+        }
+    }
+
+    // Agrega entidades a la lista de personajes ordenándolas de mayor a menor
+    // velocidad.
+    private static void agregarOrdenadoPorVelocidad(List<Entidad> personajes, List<Entidad> grupo) {
+        for (Entidad e : grupo) {
+            int pos = 0;
+            while (pos < personajes.size()
+                    && personajes.get(pos).getArmadura().getVelocidad() >= e.getArmadura().getVelocidad()) {
+                pos++;
+            }
+            personajes.add(pos, e);
+        }
+    }
+
+    // Elimina de la lista a las entidades cuya vida sea 0 o inferior.
+    private static void eliminarMuertos(List<Entidad> grupo, boolean mostrarMensaje) {
+        for (int j = grupo.size() - 1; j >= 0; j--) {
+            if (grupo.get(j).getVida() <= 0) {
+                if (mostrarMensaje) {
+                    System.out.println("  [MUERTO] " + grupo.get(j).getNombre());
+                }
+
+                grupo.remove(j);
+            }
+        }
+    }
+}
