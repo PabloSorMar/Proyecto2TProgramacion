@@ -9,6 +9,14 @@ import proyecto.Habilidades;
  */
 public class EfectoEscudoInvulnerable extends Habilidades {
 
+    /**
+     * Constructor de EfectoEscudoInvulnerable.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public EfectoEscudoInvulnerable(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }
@@ -16,11 +24,11 @@ public class EfectoEscudoInvulnerable extends Habilidades {
     @Override
     public void EjecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
-            System.out.println("La habilidad " + this.getNombre() + " activa un escudo invulnerable.");
+            System.out.println("  La habilidad " + this.getNombre() + " activa un escudo invulnerable.");
             // Lógica de invulnerabilidad (si existe en Entidad, de lo contrario se asume que EscudoDefensivo la tiene)
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

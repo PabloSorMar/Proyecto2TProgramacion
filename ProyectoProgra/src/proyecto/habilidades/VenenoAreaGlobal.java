@@ -12,6 +12,14 @@ import proyecto.Habilidades;
  */
 public class VenenoAreaGlobal extends Habilidades {
 
+    /**
+     * Constructor de VenenoAreaGlobal.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public VenenoAreaGlobal(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }
@@ -20,7 +28,7 @@ public class VenenoAreaGlobal extends Habilidades {
     public void EjecutarHabilidad(List<Entidad> objetivos) {
         if (super.estaDisponible()) {
             Random ran = new Random();
-            System.out.println("La habilidad " + this.getNombre() + " envenena el area!");
+            System.out.println("  La habilidad " + this.getNombre() + " envenena el area!");
             for (Entidad objetivo : objetivos) {
                 if (ran.nextInt(0, 100) < this.getPrecision()) {
                     System.out.println("  " + objetivo.getNombre() + " queda envenenado!");
@@ -29,7 +37,7 @@ public class VenenoAreaGlobal extends Habilidades {
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }

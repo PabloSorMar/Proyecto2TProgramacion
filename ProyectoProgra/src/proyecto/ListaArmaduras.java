@@ -1,49 +1,92 @@
 package proyecto;
 
-//Catalogo de Armaduras
+/** Catalogo de Armaduras */
 public enum ListaArmaduras {
+    /** Constante TOGA */
     TOGA("Toga", 10, 150),
+    /** Constante ARMADURA_FLAK */
     ARMADURA_FLAK("Armadura Flak", 20, 100),
+    /** Armadura Death Korps */
     ARMADURA_DEATH_KORPS("Armadura Death Korps", 25, 75),
+    /** Armadura Caparazón */
     ARMADURA_CAPARAZON("Armadura Caparazón", 30, 75),
+    /** Armadura de Placas */
     ARMADURA_DE_PLACAS("Armadura de Placas", 40, 50),
+    /** Constante BLINDAJE */
     BLINDAJE("Blindaje", 50, 50),
+    /** Constante ARMADURA_PHOBOS */
     ARMADURA_PHOBOS("Armadura Phobos", 60, 200),
+    /** Constante ARMADURA_TACTICUS */
     ARMADURA_TACTICUS("Armadura Tacticus", 75, 150),
+    /** Constante ARMADURA_GRAVIS */
     ARMADURA_GRAVIS("Armadura Gravis", 90, 100),
+    /** Constante ARMADURA_EXTERMINADOR */
     ARMADURA_EXTERMINADOR("Armadura Exterminador", 100, 75),
+    /** Constante CHATARRA */
     CHATARRA("Chatarra", 15, 170),
+    /** Constante CUERO */
     CUERO("Cuero", 25, 110),
+    /** Constante COHETE_DORSAL */
     COHETE_DORSAL("Cohete Dorsal", 35, 180),
+    /** Constante MEGA_CHATARRA */
     MEGA_CHATARRA("Mega-chatarra", 85, 70),
+    /** Constante ARNES_SOLDADO */
     ARNES_SOLDADO("Arnés Soldado", 50, 90),
+    /** Constante TRAJE_IGNIFUGO */
     TRAJE_IGNIFUGO("Traje Ignífugo", 45, 100),
+    /** Constante BLINDAJE_LIGERO */
     BLINDAJE_LIGERO("Blindaje Ligero", 12, 200),
+    /** Constante METAL_VIVIENTE */
     METAL_VIVIENTE("Metal Viviente", 75, 80),
+    /** Constante METAL_PESADO */
     METAL_PESADO("Metal Pesado", 85, 70),
+    /** Constante CAPARAZON_SIGILO */
     CAPARAZON_SIGILO("Caparazón Sigilo", 35, 150),
+    /** Constante CHASIS_GRAVITICO */
     CHASIS_GRAVITICO("Chasis Gravítico", 75, 130),
+    /** Constante ARMADURA_REGIA */
     ARMADURA_REGIA("Armadura Regia", 100, 90),
+    /** Constante QUITINA_FINA */
     QUITINA_FINA("Quitina Fina", 10, 180),
+    /** Constante QUITINA_REFORZADA */
     QUITINA_REFORZADA("Quitina Reforzada", 30, 170),
+    /** Constante QUITINA_PESADA */
     QUITINA_PESADA("Quitina Pesada", 70, 110),
+    /** Constante CAMUFLAJE */
     CAMUFLAJE("Camuflaje", 25, 210),
+    /** Constante ESCUDO_PSIQUICO */
     ESCUDO_PSIQUICO("Escudo Psíquico", 75, 80),
+    /** Constante MALLA_RUNICA */
     MALLA_RUNICA("Malla Rúnica", 25, 180),
+    /** Constante ARMADURA_ESPECTRO */
     ARMADURA_ESPECTRO("Armadura Espectro", 85, 70),
+    /** A. Pesada Eldar */
     A_PESADA_ELDAR("A. Pesada Eldar", 60, 120),
+    /** Constante TUNICA_RUNICA */
     TUNICA_RUNICA("Túnica Rúnica", 20, 160),
+    /** Constante ARMADURA_TAU */
     ARMADURA_TAU("Armadura Tau", 30, 130),
+    /** A. Ligera Tau */
     A_LIGERA_TAU("A. Ligera Tau", 22, 160),
+    /** Constante TRAJE_SIGILO */
     TRAJE_SIGILO("Traje Sigilo", 35, 180),
+    /** Constante TRAJE_COMBATE */
     TRAJE_COMBATE("Traje Combate", 60, 110),
+    /** Constante BLINDAJE_XV88 */
     BLINDAJE_XV88("Blindaje XV88", 100, 50),
+    /** Constante TOGA_DEL_HONOR */
     TOGA_DEL_HONOR("Toga del Honor", 18, 150),
+    /** Constante HARAPOS_MALDITOS */
     HARAPOS_MALDITOS("Harapos Malditos", 8, 160),
+    /** Constante SERVO_TRAIDORA */
     SERVO_TRAIDORA("Servo-Traidora", 60, 100),
+    /** Constante PLACAS_DE_SANGRE */
     PLACAS_DE_SANGRE("Placas de Sangre", 70, 120),
+    /** Constante ARMADURA_OXIDADA */
     ARMADURA_OXIDADA("Armadura Oxidada", 85, 60),
+    /** Constante TUNICA_DISFORME */
     TUNICA_DISFORME("Túnica Disforme", 25, 150),
+    /** Constante PIEL_MUTADA */
     PIEL_MUTADA("Piel Mutada", 35, 140);
 
     private final String nombre;
@@ -52,7 +95,8 @@ public enum ListaArmaduras {
 
     /**
      * Constructor interno del enumerado.
-     * * @param nombre    Nombre visual de la pieza de armadura.
+     * * @param nombre Nombre visual de la pieza de armadura.
+     * 
      * @param blindaje  Puntos de defensa que proporciona.
      * @param velocidad Valor de agilidad o rapidez asociado.
      */
@@ -63,9 +107,11 @@ public enum ListaArmaduras {
     }
 
     /**
-     * Crea y devuelve una nueva instancia de la clase {@code Armaduras} 
+     * Crea y devuelve una nueva instancia de la clase {@code Armaduras}
      * basada en los valores definidos en la constante del enumerado.
-     * * @return Un objeto de tipo {@link Armaduras} listo para ser equipado por una entidad.
+     * 
+     * @return Un objeto de tipo {@link Armaduras} listo para ser equipado por una
+     *         entidad.
      */
     public Armaduras crearInstancia() {
         return new Armaduras(nombre, blindaje, velocidad);

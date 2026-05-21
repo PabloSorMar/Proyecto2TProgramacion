@@ -6,10 +6,18 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto: Aplica curaciÃ³n sostenida (HoT) a mÃºltiples aliados aleatorios.
+ * Efecto: Aplica curación sostenida (HoT) a múltiples aliados aleatorios.
  */
 public class CuracionSostenidaMultiple extends Habilidades {
 
+    /**
+     * Constructor de CuracionSostenidaMultiple.
+     * @param nombre parametro.
+     * @param cooldownBase parametro.
+     * @param efecto parametro.
+     * @param distancia parametro.
+     * @param tipo parametro.
+     */
     public CuracionSostenidaMultiple(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }
@@ -21,15 +29,15 @@ public class CuracionSostenidaMultiple extends Habilidades {
             for (int i = 0; i < 4; i++) {
                 if (ran.nextInt(0, 100) < this.getPrecision()) {
                     Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-                    System.out.println("La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
+                    System.out.println("  La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
                     objetivo.setTurnoCuracion(1);
                 } else {
-                    System.out.println("La habilidad " + this.getNombre() + " falla el impacto " + (i + 1));
+                    System.out.println("  La habilidad " + this.getNombre() + " falla el impacto " + (i + 1));
                 }
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }
