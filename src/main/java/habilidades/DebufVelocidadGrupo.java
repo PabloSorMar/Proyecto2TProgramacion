@@ -10,6 +10,15 @@ import proyecto.Habilidades;
  */
 public class DebufVelocidadGrupo extends Habilidades {
 
+    /**
+     * Constructor de DebufVelocidadGrupo.
+     * 
+     * @param nombre       parametro.
+     * @param cooldownBase parametro.
+     * @param efecto       parametro.
+     * @param distancia    parametro.
+     * @param tipo         parametro.
+     */
     public DebufVelocidadGrupo(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }
@@ -20,17 +29,16 @@ public class DebufVelocidadGrupo extends Habilidades {
             Random ran = new Random();
             for (Entidad objetivo : objetivos) {
                 if (ran.nextInt(0, 100) < this.getPrecision()) {
-                    System.out.println("La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
+                    System.out.println("  La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
                     objetivo.getArmadura().setVelocidad(objetivo.getArmadura().getVelocidad() - 5);
                 } else {
-                    System.out.println("La habilidad " + this.getNombre() + " falla contra " + objetivo.getNombre());
+                    System.out.println("  La habilidad " + this.getNombre() + " falla contra " + objetivo.getNombre());
                 }
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }
 }
-

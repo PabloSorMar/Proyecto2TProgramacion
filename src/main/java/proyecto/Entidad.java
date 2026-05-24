@@ -61,95 +61,210 @@ public class Entidad {
     }
 
     // SETTERS Y GETTERS
+    /**
+     * Metodo getNombre.
+     * 
+     * @return getNombre valor.
+     */
     public String getNombre() {
         return this.nombre;
     }
 
+    /**
+     * Metodo getFaccion.
+     * 
+     * @return getFaccion valor.
+     */
     public String getFaccion() {
         return this.faccion;
     }
 
+    /**
+     * Metodo getVida.
+     * 
+     * @return getVida valor.
+     */
     public int getVida() {
         return this.vida;
     }
 
+    /**
+     * Metodo getTurnoStun.
+     * 
+     * @return getTurnoStun valor.
+     */
     public int getTurnoStun() {
         return this.turnoStun;
     }
 
+    /**
+     * Metodo getTurnoHemorragia.
+     * 
+     * @return getTurnoHemorragia valor.
+     */
     public int getTurnoHemorragia() {
         return this.turnoHemorragia;
     }
 
+    /**
+     * Metodo getTurnoVeneno.
+     * 
+     * @return getTurnoVeneno valor.
+     */
     public int getTurnoVeneno() {
         return this.turnoVeneno;
     }
 
+    /**
+     * Metodo getTurnoCuracion.
+     * 
+     * @return getTurnoCuracion valor.
+     */
     public int getTurnoCuracion() {
         return this.turnoCuracion;
     }
 
+    /**
+     * Metodo getDefendido.
+     * 
+     * @return getDefendido valor.
+     */
     public boolean getDefendido() {
         return this.defendido;
     }
 
+    /**
+     * Metodo getArma.
+     * 
+     * @return getArma valor.
+     */
     public Arma getArma() {
         return this.arma;
     }
 
+    /**
+     * Metodo getArmadura.
+     * 
+     * @return getArmadura valor.
+     */
     public Armaduras getArmadura() {
         return this.armadura;
     }
 
+    /**
+     * Metodo getHabilidades.
+     * 
+     * @return getHabilidades valor.
+     */
     public List<Habilidades> getHabilidades() {
         return this.habilidades;
     }
 
+    /**
+     * Metodo setNombre.
+     * 
+     * @param nombre parametro.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Metodo setFaccion.
+     * 
+     * @param faccion parametro.
+     */
     public void setFaccion(String faccion) {
         this.faccion = faccion;
     }
 
+    /**
+     * Metodo setVida.
+     * 
+     * @param vida parametro.
+     */
     public void setVida(int vida) {
         this.vida = vida;
     }
 
+    /**
+     * Metodo setTurnoStun.
+     * 
+     * @param turnoStun parametro.
+     */
     public void setTurnoStun(int turnoStun) {
         this.turnoStun = turnoStun;
     }
 
+    /**
+     * Metodo setTurnoHemorragia.
+     * 
+     * @param turnoHemorragia parametro.
+     */
     public void setTurnoHemorragia(int turnoHemorragia) {
         this.turnoHemorragia = turnoHemorragia;
     }
 
+    /**
+     * Metodo setTurnoVeneno.
+     * 
+     * @param turnoVeneno parametro.
+     */
     public void setTurnoVeneno(int turnoVeneno) {
         this.turnoVeneno = turnoVeneno;
     }
 
+    /**
+     * Metodo setTurnoCuracion.
+     * 
+     * @param turnoCuracion parametro.
+     */
     public void setTurnoCuracion(int turnoCuracion) {
         this.turnoCuracion = turnoCuracion;
     }
 
+    /**
+     * Metodo setDefendido.
+     * 
+     * @param defendido parametro.
+     */
     public void setDefendido(boolean defendido) {
         this.defendido = defendido;
     }
 
+    /**
+     * Metodo setArma.
+     * 
+     * @param arma parametro.
+     */
     public void setArma(Arma arma) {
         this.arma = arma;
     }
 
+    /**
+     * Metodo setArmadura.
+     * 
+     * @param armadura parametro.
+     */
     public void setArmadura(Armaduras armadura) {
         this.armadura = armadura;
     }
 
+    /**
+     * Metodo setHabilidades.
+     * 
+     * @param habilidades parametro.
+     */
     public void setHabilidades(List<Habilidades> habilidades) {
         this.habilidades = habilidades;
     }
 
     // Devuelve el codigo ANSI de color segun la faccion de la entidad
+    /**
+     * Metodo getColorFaccion.
+     * 
+     * @return getColorFaccion valor.
+     */
     public String getColorFaccion() {
         switch (this.faccion) {
             case "Astra Militarum":
@@ -203,13 +318,11 @@ public class Entidad {
         String COLOR = getColorFaccion();
         String RESET = "\u001B[0m";
         System.out.println(COLOR + "Turno de " + this.getNombre() + RESET);
-        // Comprobar si el personaje esta defendido para desactivar ese estado
-        if (this.getDefendido()) {
-            this.setDefendido(false);
-        }
+
+        this.setDefendido(false);
         // Primero efectos activo de daño en si mismo
         if (this.getTurnoStun() > 0) {
-            System.out.println(this.getNombre() + " esta arturdido");
+            System.out.println("  " + this.getNombre() + " esta arturdido");
             setTurnoStun(getTurnoStun() - 1);
         } else {
             aplicarEstadosAlterados();
@@ -229,21 +342,21 @@ public class Entidad {
                     ejecutarAtaque(aliados, armaAUsar, ran, 2);
                 }
             } else if (accion == 1) {// Activa posicion defensiva y recibir menos daño
-                System.out.println(this.getNombre() + " decide  colocarse en posicion defensiva");
+                System.out.println("  " + this.getNombre() + " decide  colocarse en posicion defensiva");
                 this.setDefendido(true);
             } else if (accion == 2) {// caso de utilizar habilidades
                 ejecutarHabilidadAleatoria(aliados, enemigos, personaje, ran);
             } else if (accion == 3) {// Accion de recargas las balas del arma
                 Arma armaRecarga = this.getArma();
                 if (armaRecarga.getMunicionMax() > 0) {
-                    System.out.println(this.getNombre() + " recarga su arma: " + armaRecarga.getNombre()
+                    System.out.println("  " + this.getNombre() + " recarga su arma: " + armaRecarga.getNombre()
                             + " (" + armaRecarga.getMunicionAct() + " -> " + armaRecarga.getMunicionMax() + ")");
                     armaRecarga.setMunicionAct(armaRecarga.getMunicionMax());
                 } else {
-                    System.out.println(this.getNombre() + " no necesita recargar (arma melee), pasa turno");
+                    System.out.println("  " + this.getNombre() + " no necesita recargar (arma melee), pasa turno");
                 }
             } else {
-                System.out.println(this.getNombre() + " decide pasar turno sin realizar ninguna accion");
+                System.out.println("  " + this.getNombre() + " decide pasar turno sin realizar ninguna accion");
             }
 
         }
@@ -268,16 +381,17 @@ public class Entidad {
                 if (ran.nextBoolean()) {
                     armaAUsar = heroeActual.getArma2();
                     System.out.println(
-                            this.getNombre() + " decide atacar con su ARMA SECUNDARIA: " + armaAUsar.getNombre());
+                            "  " + this.getNombre() + " decide atacar con su ARMA SECUNDARIA: "
+                                    + armaAUsar.getNombre());
                     return armaAUsar;
                 } else {
                     System.out.println(
-                            this.getNombre() + " decide atacar con su ARMA PRINCIPAL: " + armaAUsar.getNombre());
+                            "  " + this.getNombre() + " decide atacar con su ARMA PRINCIPAL: " + armaAUsar.getNombre());
                     return armaAUsar;
                 }
             }
         }
-        System.out.println(this.getNombre() + " decide atacar con su arma: " + armaAUsar.getNombre());
+        System.out.println("  " + this.getNombre() + " decide atacar con su arma: " + armaAUsar.getNombre());
         return armaAUsar;
     }
 
@@ -286,7 +400,7 @@ public class Entidad {
         int habilidad_aleatoria = ran.nextInt(0, this.getHabilidades().size());
         Habilidades habilidadElegida = this.getHabilidades().get(habilidad_aleatoria);
         String tipoHab = habilidadElegida.getTipo();
-        System.out.println(this.getNombre() + " decide usar una habilidad: " + habilidadElegida.getNombre());
+        System.out.println("  " + this.getNombre() + " decide usar una habilidad: " + habilidadElegida.getNombre());
 
         boolean dirigidaAEnemigos = tipoHab.equals("ofensiva") || tipoHab.equals("debuf");
         List<Entidad> objetivos = (aliados.contains(personaje) == dirigidaAEnemigos) ? enemigos : aliados;
@@ -317,10 +431,10 @@ public class Entidad {
                 break; // Todos muertos
 
             Entidad objetivo = objetivos.get(objetivo_aleatorio);
-            System.out.print("Objetivo " + (i + 1) + ": " + objetivo.getNombre() + "\n");
+            System.out.print("  Objetivo " + (i + 1) + ": " + objetivo.getNombre() + "\n");
 
             for (int j = 0; j < armaAUsar.getNumAtaques(); j++) {
-                System.out.println("Ataque numero " + (j + 1));
+                System.out.println("    Ataque numero " + (j + 1));
 
                 int blindajeEfectivo = objetivo.getArmadura().getBlindaje();
                 if (objetivo.getDefendido()) {
@@ -329,7 +443,8 @@ public class Entidad {
 
                 if (!armaAUsar.getEsMelee()) {
                     if (armaAUsar.getMunicionAct() <= 0) {
-                        System.out.println(armaAUsar.getNombre() + " sin municion, recargando y fin de turno!");
+                        System.out
+                                .println("    " + armaAUsar.getNombre() + " sin municion, recargando y fin de turno!");
                         armaAUsar.setMunicionAct(armaAUsar.getMunicionMax());
                         return; // Termina el turno
                     }
@@ -339,9 +454,9 @@ public class Entidad {
                 if (ran.nextInt(0, 100) < armaAUsar.getPrecision()) {
                     boolean esCritico = ran.nextInt(1, 7) == 1;
                     if (esCritico) {
-                        System.out.println("CRITICO");
+                        System.out.println("    CRITICO");
                     } else {
-                        System.out.println("Golpe normal");
+                        System.out.println("    Golpe normal");
                     }
 
                     int daño = armaAUsar.getDaño();
@@ -351,7 +466,7 @@ public class Entidad {
                     }
                     objetivo.setVida(objetivo.getVida() - daño_final);
                 } else {
-                    System.out.println("No golpea al objetivo el ataque ");
+                    System.out.println("    No golpea al objetivo el ataque ");
                 }
             }
         }

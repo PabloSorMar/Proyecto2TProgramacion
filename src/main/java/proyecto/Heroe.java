@@ -31,10 +31,20 @@ public class Heroe extends Entidad {
         this.arma2 = arma2;
     }
 
+    /**
+     * Metodo getArma2.
+     * 
+     * @return getArma2 valor.
+     */
     public Arma getArma2() {
         return this.arma2;
     }
 
+    /**
+     * Metodo setArma2.
+     * 
+     * @param arma2 parametro.
+     */
     public void setArma2(Arma arma2) {
         this.arma2 = arma2;
     }

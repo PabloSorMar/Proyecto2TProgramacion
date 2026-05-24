@@ -10,6 +10,15 @@ import proyecto.Habilidades;
  */
 public class DebufVelocidadIndividual extends Habilidades {
 
+    /**
+     * Constructor de DebufVelocidadIndividual.
+     * 
+     * @param nombre       parametro.
+     * @param cooldownBase parametro.
+     * @param efecto       parametro.
+     * @param distancia    parametro.
+     * @param tipo         parametro.
+     */
     public DebufVelocidadIndividual(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }
@@ -20,16 +29,15 @@ public class DebufVelocidadIndividual extends Habilidades {
             Random ran = new Random();
             if (ran.nextInt(0, 100) < this.getPrecision()) {
                 Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-                System.out.println("La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
+                System.out.println("  La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
                 objetivo.getArmadura().setVelocidad(objetivo.getArmadura().getVelocidad() - 15);
             } else {
-                System.out.println("La habilidad " + this.getNombre() + " falla");
+                System.out.println("  La habilidad " + this.getNombre() + " falla");
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }
 }
-

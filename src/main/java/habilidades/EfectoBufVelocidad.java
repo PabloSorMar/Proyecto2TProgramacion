@@ -12,7 +12,18 @@ public class EfectoBufVelocidad extends Habilidades {
 
     private final int aumentoVelocidad;
 
-    public EfectoBufVelocidad(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo, int aumento) {
+    /**
+     * Constructor de EfectoBufVelocidad.
+     * 
+     * @param nombre       parametro.
+     * @param cooldownBase parametro.
+     * @param efecto       parametro.
+     * @param distancia    parametro.
+     * @param tipo         parametro.
+     * @param aumento      parametro.
+     */
+    public EfectoBufVelocidad(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo,
+            int aumento) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
         this.aumentoVelocidad = aumento;
     }
@@ -22,13 +33,13 @@ public class EfectoBufVelocidad extends Habilidades {
         if (super.estaDisponible()) {
             Random ran = new Random();
             Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-            System.out.println("La habilidad " + this.getNombre() + " aumenta la velocidad de " + objetivo.getNombre() + " (+" + aumentoVelocidad + ")");
+            System.out.println("  La habilidad " + this.getNombre() + " aumenta la velocidad de " + objetivo.getNombre()
+                    + " (+" + aumentoVelocidad + ")");
             objetivo.getArmadura().setVelocidad(objetivo.getArmadura().getVelocidad() + aumentoVelocidad);
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }
 }
-

@@ -13,6 +13,15 @@ import proyecto.Habilidades;
  */
 public class RecargarArma extends Habilidades {
 
+    /**
+     * Constructor de RecargarArma.
+     * 
+     * @param nombre       parametro.
+     * @param cooldownBase parametro.
+     * @param efecto       parametro.
+     * @param distancia    parametro.
+     * @param tipo         parametro.
+     */
     public RecargarArma(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }
@@ -22,7 +31,7 @@ public class RecargarArma extends Habilidades {
         if (super.estaDisponible()) {
             Random ran = new Random();
             Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-            System.out.println("La habilidad " + this.getNombre() + " recarga el arma de " + objetivo.getNombre());
+            System.out.println("  La habilidad " + this.getNombre() + " recarga el arma de " + objetivo.getNombre());
             if (objetivo.getArma().getMunicionMax() > 0) {
                 objetivo.getArma().setMunicionAct(objetivo.getArma().getMunicionMax());
                 System.out.println("  Municion restaurada a " + objetivo.getArma().getMunicionMax());
@@ -31,9 +40,8 @@ public class RecargarArma extends Habilidades {
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }
 }
-

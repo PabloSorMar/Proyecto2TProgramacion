@@ -6,10 +6,19 @@ import proyecto.Entidad;
 import proyecto.Habilidades;
 
 /**
- * Efecto: Reduce la precisiÃ³n de un solo objetivo aleatorio.
+ * Efecto: Reduce la precisión de un solo objetivo aleatorio.
  */
 public class DebufPrecisionIndividual extends Habilidades {
 
+    /**
+     * Constructor de DebufPrecisionIndividual.
+     * 
+     * @param nombre       parametro.
+     * @param cooldownBase parametro.
+     * @param efecto       parametro.
+     * @param distancia    parametro.
+     * @param tipo         parametro.
+     */
     public DebufPrecisionIndividual(String nombre, int cooldownBase, String efecto, boolean distancia, String tipo) {
         super(nombre, cooldownBase, efecto, distancia, tipo);
     }
@@ -20,16 +29,15 @@ public class DebufPrecisionIndividual extends Habilidades {
             Random ran = new Random();
             if (ran.nextInt(0, 100) < this.getPrecision()) {
                 Entidad objetivo = objetivos.get(ran.nextInt(0, objetivos.size()));
-                System.out.println("La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
+                System.out.println("  La habilidad " + this.getNombre() + " impacta en " + objetivo.getNombre());
                 objetivo.getArma().setPrecision(objetivo.getArma().getPrecision() - 15);
             } else {
-                System.out.println("La habilidad " + this.getNombre() + " falla");
+                System.out.println("  La habilidad " + this.getNombre() + " falla");
             }
             super.usarHabilidad();
         } else {
-            System.out.println("La habilidad " + this.getNombre() + " esta en cooldown");
+            System.out.println("  La habilidad " + this.getNombre() + " esta en cooldown");
             super.reducirCooldown();
         }
     }
 }
-
